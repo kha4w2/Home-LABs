@@ -5,6 +5,9 @@
 
 ## 1. Network Topology & IP Addressing
 
+<img width="1125" height="604" alt="image" src="https://github.com/user-attachments/assets/824b77f7-453c-4e81-a397-87ab325e47ac" />
+
+
 The lab environment is segmented into three logical zones: Attacker Network, Internal Network, and Monitoring Network. All traffic between the attacker and victim is forced through an inline IPS to ensure inspection and control.
 
 | Component | IP Address | Zone | Role |
@@ -63,43 +66,89 @@ The main objectives of this SOC lab are:
 
 ### ➤ Step 1: Initial Setup, Wazuh SIEM Deployment, and Endpoint (victim) Integration
 
-![Figure 1: Updating and Verifying Ubuntu Package Repository Status](s)
+<img width="1150" height="341" alt="image" src="https://github.com/user-attachments/assets/5e0ba649-1d73-45a1-a293-54437d8f18d3" />
 
-![Figure 2: Downloading the Wazuh Installation Script Using curl](s)
 
-![Figure 3: Executing the Wazuh Installation Script (Indexer Initialization Phase)](s)
+Figure 1: Updating and Verifying Ubuntu Package Repository Status
 
-![Figure 4: Completing Wazuh Manager and Dashboard Installation](s)
+<img width="1138" height="115" alt="image" src="https://github.com/user-attachments/assets/b64545d1-bd5d-4a88-895e-0be7bf8bf2f7" />
 
-![Figure 5: Wazuh Dashboard Login Page](s)
+Figure 2: Downloading the Wazuh Installation Script Using curl
 
-![Figure 6: Wazuh Dashboard Health Check](s)
+<img width="1121" height="402" alt="image" src="https://github.com/user-attachments/assets/428b72cf-0d19-406c-8692-0e2728277436" />
 
-![Figure 7: Successful Ping from Windows 11 to Wazuh Server](s)
+Figure 3: Executing the Wazuh Installation Script (Indexer Initialization Phase)
 
-![Figure 8: Wazuh Dashboard – Agents Overview (No Agents Connected)](s)
+<img width="1108" height="378" alt="image" src="https://github.com/user-attachments/assets/c687ea40-982f-4b73-af30-30165362bf31" />
 
-![Figure 9: Wazuh Agent Deployment Page (Configuration Settings)](s)
+Figure 4: Completing Wazuh Manager and Dashboard Installation
 
-![Figure 10: Wazuh Agent Installation Command via PowerShell](s)
+<img width="1130" height="252" alt="image" src="https://github.com/user-attachments/assets/593b3477-91c4-47ef-afaf-af6124c45757" />
 
-![Figure 11: Downloading and Installing Wazuh Agent on Windows](s)
+Figure 5: Wazuh Dashboard Login Page
 
-![Figure 12: Successful Download of Wazuh Agent Package](s)
+<img width="1130" height="343" alt="image" src="https://github.com/user-attachments/assets/ef89f075-d612-4148-bd69-4756040d7be7" />
 
-![Figure 13: Wazuh Agent Service Status (Already Running)](s)
 
-![Figure 14: Wazuh Dashboard – Active Agent Successfully Connected](s)
+Figure 6: Wazuh Dashboard Health Check
 
-![Figure 15: Wazuh Dashboard – Event Logs from Connected Windows 11 Agent (Log Visibility in Discover View)](s)
+<img width="1147" height="449" alt="image" src="https://github.com/user-attachments/assets/7eb49139-259f-45c3-a140-0119e1360202" />
 
-![Figure 16: VMware Virtual Network Editor Configuration (VMnet0, VMnet1, VMnet8)](s)
+Figure 7: Successful Ping from Windows 11 to Wazuh Server
 
-![Figure 17: Kali Linux Virtual Machine Network Adapter Settings (Multi-NIC Configuration)](s)
+<img width="1055" height="278" alt="image" src="https://github.com/user-attachments/assets/61280c42-67ea-4ecf-851a-0b63bbb767bc" />
 
-![Figure 18: Verifying Assigned IP Addresses on Kali Linux (ip a Output)](s)
+Figure 8: Wazuh Dashboard – Agents Overview (No Agents Connected)
 
-![Figure 19: Routing Table and Interface Status Verification on Kali Linux](s)
+<img width="1082" height="334" alt="image" src="https://github.com/user-attachments/assets/d2f417cc-5b10-418e-b2c9-81305e026a9d" />
+
+
+Figure 9: Wazuh Agent Deployment Page (Configuration Settings)
+
+<img width="1080" height="290" alt="image" src="https://github.com/user-attachments/assets/07d8982b-9b33-47f1-8c7c-05a6014f56a9" />
+
+Figure 10: Wazuh Agent Installation Command via PowerShell
+
+<img width="1128" height="97" alt="image" src="https://github.com/user-attachments/assets/fca5bf6a-308f-459a-8033-d83ffeef38b7" />
+
+
+Figure 11: Downloading and Installing Wazuh Agent on Windows
+
+<img width="1128" height="98" alt="image" src="https://github.com/user-attachments/assets/e20d49ce-ac80-4e07-a292-4360e15f7c69" />
+
+
+Figure 12: Successful Download of Wazuh Agent Package
+
+<img width="1125" height="129" alt="image" src="https://github.com/user-attachments/assets/48bc5b40-6ba6-4eba-80af-8f41d3771832" />
+
+
+Figure 13: Wazuh Agent Service Status (Already Running)
+
+<img width="1127" height="326" alt="image" src="https://github.com/user-attachments/assets/a16e9dd0-ab1c-42af-b21b-cd8da5bc0c89" />
+
+
+Figure 14: Wazuh Dashboard – Active Agent Successfully Connected
+
+<img width="720" height="384" alt="image" src="https://github.com/user-attachments/assets/c8d156c5-8f30-496b-b3db-ff2889080e75" />
+
+
+Figure 15: Wazuh Dashboard – Event Logs from Connected Windows 11 Agent (Log Visibility in Discover View)
+
+<img width="1108" height="525" alt="image" src="https://github.com/user-attachments/assets/b557309a-546d-405f-9834-fa4a1da674ce" />
+
+Figure 16: VMware Virtual Network Editor Configuration (VMnet0, VMnet1, VMnet8)
+
+<img width="700" height="137" alt="image" src="https://github.com/user-attachments/assets/fa052604-f718-4f37-a956-7f03e57bb7d5" />
+
+Figure 17: Kali Linux Virtual Machine Network Adapter Settings (Multi-NIC Configuration)
+
+<img width="1125" height="412" alt="image" src="https://github.com/user-attachments/assets/f6486b24-57dd-424d-a205-bee44c03b44b" />
+
+Figure 18: Verifying Assigned IP Addresses on Kali Linux (ip a Output)
+
+<img width="720" height="390" alt="image" src="https://github.com/user-attachments/assets/7a4f7f74-1ef8-4026-966f-9f5013fd9677" />
+
+Figure 19: Routing Table and Interface Status Verification on Kali Linux
 
 **Explanation:**
 
@@ -142,13 +191,24 @@ sudo ethtool eth2 | grep "Link detected"
 
 ### ➤ Step 2: Install and Validate Snort IDS on Kali Linux
 
-![Figure 20: Updating Kali Linux Package Repository and Upgrading System Packages](s)
+<img width="712" height="285" alt="image" src="https://github.com/user-attachments/assets/02d6b119-d61f-4182-8abd-ca70af37efc2" />
 
-![Figure 21: Installing Snort IDS and Required Dependencies](s)
+Figure 20: Updating Kali Linux Package Repository and Upgrading System Packages
 
-![Figure 22: Verifying Snort Installation Version and Configuration](s)
+<img width="1121" height="511" alt="image" src="https://github.com/user-attachments/assets/c4406ece-95b9-4072-9bd5-748b0e5da200" />
 
-![Figure 23: Inspecting Snort Configuration Directory (/etc/snort)](s)
+Figure 21: Installing Snort IDS and Required Dependencies
+
+<img width="715" height="244" alt="image" src="https://github.com/user-attachments/assets/50fd4d6e-d3b6-45f3-a3f9-f9643467b990" />
+
+Figure 22: Verifying Snort Installation Version and Configuration
+
+<img width="709" height="256" alt="image" src="https://github.com/user-attachments/assets/fe040c07-0b0f-4ddc-b053-b7a6f439ea67" />
+
+
+Figure 23: Inspecting Snort Configuration Directory (/etc/snort)
+
+<img width="711" height="219" alt="image" src="https://github.com/user-attachments/assets/f6c86435-dc8a-4143-bb2a-c34ac7c682ae" />
 
 ![Figure 24: Reviewing Default Snort Rule Sets](s)
 
@@ -171,11 +231,18 @@ ls -all /etc/snort/rules/
 
 ### ➤ Step 3: Configure Snort IDS (snort.lua Customization)
 
-![Figure 25: Editing Snort Configuration File (snort.lua – HOME_NET Definition)](s)
+<img width="1125" height="624" alt="image" src="https://github.com/user-attachments/assets/7e78cf2c-8486-46e8-bfdb-6432f86e8e1b" />
 
-![Figure 26: Adding Local Rule Path in Snort Configuration](s)
 
-![Figure 27: Configuring Snort Alert Output (alert_fast and alert_json Modes)](s)
+Figure 25: Editing Snort Configuration File (snort.lua – HOME_NET Definition)
+
+<img width="720" height="174" alt="image" src="https://github.com/user-attachments/assets/c05f0840-1211-4ab2-a790-f6ce0303d709" />
+
+Figure 26: Adding Local Rule Path in Snort Configuration
+
+<img width="720" height="222" alt="image" src="https://github.com/user-attachments/assets/cae58b6c-1f82-4f67-968a-6ef3eea284b7" />
+
+Figure 27: Configuring Snort Alert Output (alert_fast and alert_json Modes)
 
 **Commands Used:**
 
@@ -191,15 +258,26 @@ This step configures Snort alert output formats to support both real-time monito
 
 ### ➤ Step 4: Create Custom Detection Rules and Validate Snort Alerts
 
-![Figure 28: Adding Snort Local Rules File (local.rules)](s)
+<img width="1151" height="417" alt="image" src="https://github.com/user-attachments/assets/6244d7a9-cfd4-4ceb-bad6-25f2e91bcf5f" />
 
-![Figure 29: Validating Snort Configuration (Test Mode)](s)
 
-![Figure 30: Running Snort in IDS Mode (alert_fast Output)](s)
+Figure 28: Adding Snort Local Rules File (local.rules)
 
-![Figure 31: Real-Time Snort Alerts During Nmap SYN Scan and ICMP Traffic Simulation](s)
+<img width="737" height="282" alt="image" src="https://github.com/user-attachments/assets/850efd5a-8aad-438a-a4c6-0c0650d4538e" />
 
-![Figure 32: Real-Time Snort Alerts in JSON Format (SYN Scan, ICMP Ping, and ICMP Flood Detection)](s)
+Figure 29: Validating Snort Configuration (Test Mode)
+
+<img width="720" height="96" alt="image" src="https://github.com/user-attachments/assets/f50e4df1-fcca-4692-9648-2bff890ff36e" />
+
+Figure 30: Running Snort in IDS Mode (alert_fast Output)
+
+<img width="720" height="310" alt="image" src="https://github.com/user-attachments/assets/d03db577-e395-4a44-a008-bb6b584d3c4d" />
+
+Figure 31: Real-Time Snort Alerts During Nmap SYN Scan and ICMP Traffic Simulation
+
+<img width="720" height="602" alt="image" src="https://github.com/user-attachments/assets/eab3d764-625c-4428-8dcd-f310d406c33c" />
+
+Figure 32: Real-Time Snort Alerts in JSON Format (SYN Scan, ICMP Ping, and ICMP Flood Detection)
 
 **Commands Used:**
 
@@ -222,43 +300,85 @@ This step involves creating custom Snort detection rules and validating their ef
 
 ### ➤ Step 5: Integration of Snort IDS with Wazuh SIEM and End-to-End Alert Validation
 
-![Figure 33: Wazuh Dashboard – Linux Agent Deployment Configuration (DEB Package Selection)](s)
 
-![Figure 34: Generated Wazuh Agent Installation Command for Kali Linux](s)
+<img width="1135" height="453" alt="image" src="https://github.com/user-attachments/assets/645a3d82-9b1b-4040-bb43-12069b7b493f" />
 
-![Figure 35: Installing and Starting Wazuh Agent on Kali Linux (Snort Node)](s)
 
-![Figure 36: Wazuh Dashboard – Kali Agent Successfully Connected (Snort_IDS_IPS Active)](s)
+Figure 33: Wazuh Dashboard – Linux Agent Deployment Configuration (DEB Package Selection)
 
-![Figure 37: Wazuh Discover View – Incoming Logs from Snort Agent (Pre-Parsing Stage)](s)
 
-![Figure 38: Editing Wazuh Agent Configuration File (ossec.conf) on Kali Linux](s)
+<img width="1131" height="351" alt="image" src="https://github.com/user-attachments/assets/74af8369-7b29-43a3-b924-c09266705837" />
 
-![Figure 39: Configuring Client Buffer and Agent Enrollment Settings](s)
 
-![Figure 40: Adding Snort JSON Log Source to Wazuh Agent Configuration](s)
+Figure 34: Generated Wazuh Agent Installation Command for Kali Linux
 
-![Figure 41: Adjusting Log File Permissions and Restarting Wazuh Agent Service](s)
+<img width="1133" height="459" alt="image" src="https://github.com/user-attachments/assets/23eef3a7-309f-4de6-83d6-d9a273f2a3d0" />
 
-![Figure 42: Editing Wazuh Manager Configuration File (ossec.conf) on Ubuntu Server](s)
+Figure 35: Installing and Starting Wazuh Agent on Kali Linux (Snort Node)
 
-![Figure 43: Enabling JSON Output Logging on Wazuh Manager](s)
+<img width="1133" height="345" alt="image" src="https://github.com/user-attachments/assets/9369fbee-6131-4ef1-868a-aa361745ec33" />
 
-![Figure 44: Adding Additional Log Sources on Wazuh Manager](s)
+Figure 36: Wazuh Dashboard – Kali Agent Successfully Connected (Snort_IDS_IPS Active)
 
-![Figure 45: Editing Local Rules File on Wazuh Manager (local_rules.xml)](s)
+<img width="1133" height="522" alt="image" src="https://github.com/user-attachments/assets/ec453059-0142-4c8e-8b1e-c2858eaad4bd" />
 
-![Figure 46: Creating Custom Wazuh Rules for Snort Alert Correlation (SYN Scan Detection)](s)
+Figure 37: Wazuh Discover View – Incoming Logs from Snort Agent (Pre-Parsing Stage)
 
-![Figure 47: Validating Wazuh Rules Using wazuh-logtest Tool](s)
+<img width="1136" height="129" alt="image" src="https://github.com/user-attachments/assets/5abbeade-822f-4d3e-bbcc-964421cc90b6" />
 
-![Figure 48: Modifying Filebeat Ingest Pipeline to Handle Timestamp Parsing Issue](s)
+Figure 38: Editing Wazuh Agent Configuration File (ossec.conf) on Kali Linux
 
-![Figure 49: Reloading Filebeat Pipelines and Restarting Wazuh Stack Services](s)
+<img width="1138" height="417" alt="image" src="https://github.com/user-attachments/assets/ffb5c9ce-0569-4fa7-a2bf-747687c41d05" />
 
-![Figure 50: Real-Time Attack Simulation (Nmap SYN Scan) and Snort Alert Generation](s)
+Figure 39: Configuring Client Buffer and Agent Enrollment Settings
 
-![Figure 51: Wazuh Discover View – Confirmed Detection of SYN Scan Alerts (Rule ID: 100201)](s)
+<img width="1125" height="397" alt="image" src="https://github.com/user-attachments/assets/6aef57fd-a494-4c4a-a79e-0b16e0ca0794" />
+
+Figure 40: Adding Snort JSON Log Source to Wazuh Agent Configuration
+
+<img width="1125" height="406" alt="image" src="https://github.com/user-attachments/assets/ad009345-a323-4189-9812-10de750000cb" />
+
+Figure 41: Adjusting Log File Permissions and Restarting Wazuh Agent Service
+
+<img width="1133" height="70" alt="image" src="https://github.com/user-attachments/assets/4d083783-c519-4cab-ae79-c6a19a9a8548" />
+
+Figure 42: Editing Wazuh Manager Configuration File (ossec.conf) on Ubuntu Server
+
+<img width="1125" height="332" alt="image" src="https://github.com/user-attachments/assets/a9519e00-823c-4f79-9473-8e8ab3c267bb" />
+
+Figure 43: Enabling JSON Output Logging on Wazuh Manager
+
+<img width="1125" height="369" alt="image" src="https://github.com/user-attachments/assets/fc78e4e9-eb7d-47ae-8a63-27c673ec2650" />
+
+Figure 44: Adding Additional Log Sources on Wazuh Manager
+
+<img width="1125" height="52" alt="image" src="https://github.com/user-attachments/assets/1f8eab78-9f34-4948-af7c-ee8852b2733b" />
+
+Figure 45: Editing Local Rules File on Wazuh Manager (local_rules.xml)
+
+<img width="1125" height="426" alt="image" src="https://github.com/user-attachments/assets/b4038b2a-9378-424a-b825-78fab03be66f" />
+
+Figure 46: Creating Custom Wazuh Rules for Snort Alert Correlation (SYN Scan Detection)
+
+<img width="1124" height="514" alt="image" src="https://github.com/user-attachments/assets/d33f5d67-0c66-424b-80a0-c58a9d5dad76" />
+
+Figure 47: Validating Wazuh Rules Using wazuh-logtest Tool
+
+<img width="1124" height="579" alt="image" src="https://github.com/user-attachments/assets/218fb2cd-a8ab-4995-82c7-49a39ec8f8aa" />
+
+Figure 48: Modifying Filebeat Ingest Pipeline to Handle Timestamp Parsing Issue
+
+<img width="1125" height="219" alt="image" src="https://github.com/user-attachments/assets/34744c37-99bb-4148-bb98-2b6eb7cca0a3" />
+
+Figure 49: Reloading Filebeat Pipelines and Restarting Wazuh Stack Services
+
+<img width="1125" height="553" alt="image" src="https://github.com/user-attachments/assets/6cc4948b-3c4a-4d1e-a4e7-480b1168d290" />
+
+Figure 50: Real-Time Attack Simulation (Nmap SYN Scan) and Snort Alert Generation
+
+<img width="1125" height="547" alt="image" src="https://github.com/user-attachments/assets/c27bcb83-da04-4b8b-9f99-36a070a43c7e" />
+
+Figure 51: Wazuh Discover View – Confirmed Detection of SYN Scan Alerts (Rule ID: 100201)
 
 **Explanation:**
 
@@ -321,11 +441,21 @@ curl -k -u admin:PASSWORD "https://localhost:9200/wazuh-alerts-4.x-*/_search?q=r
 
 ### ➤ Step 6: Deploying Snort as an Inline IPS Using NFQUEUE for Active Traffic Prevention
 
-![Figure 52: Virtual Machine Network Adapter Configuration for Inline IPS Deployment](s)
+<img width="1130" height="1344" alt="image" src="https://github.com/user-attachments/assets/0ba9ecca-7dff-47a2-b538-af3395da88ba" />
 
-![Figure 53: System Preparation and Enabling IP Forwarding for Packet Routing](s)
 
-![Figure 54: Identifying Victim Network Interface and Interface Index on Windows](s)
+Figure 52: Virtual Machine Network Adapter Configuration for Inline IPS Deployment
+
+
+<img width="1125" height="549" alt="image" src="https://github.com/user-attachments/assets/5dee015e-f94c-4d69-a454-0844bc697fb8" />
+
+
+Figure 53: System Preparation and Enabling IP Forwarding for Packet Routing
+
+<img width="1125" height="839" alt="image" src="https://github.com/user-attachments/assets/9c824c23-613f-456d-9a43-01fe2572c85c" />
+
+
+Figure 54: Identifying Victim Network Interface and Interface Index on Windows
 
 ![Figure 55: Configuring Default Gateway on Victim to Route Traffic via IPS](s)
 
