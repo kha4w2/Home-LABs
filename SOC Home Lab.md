@@ -520,11 +520,11 @@ Figure 67: Running Snort in Inline IPS Mode with NFQUEUE
 
 <img width="1125" height="432" alt="image" src="https://github.com/user-attachments/assets/27b3f40f-a162-4510-8b3c-84179f54d49c" />
 
-![Figure 68: Validating Traffic Blocking from Attacker (ICMP Failure)](s)
+Figure 68: Validating Traffic Blocking from Attacker (ICMP Failure)
 
 <img width="1125" height="454" alt="image" src="https://github.com/user-attachments/assets/ef077f7b-0e98-4b6d-9400-11e5e866eb55" />
 
-![Figure 69: Verifying Snort Alerts Generated from Blocked Traffic](s)
+Figure 69: Verifying Snort Alerts Generated from Blocked Traffic
 
 **Explanation:**
 
@@ -600,36 +600,36 @@ sudo cat /var/log/snort/alert_fast.txt
 <img width="1125" height="498" alt="image" src="https://github.com/user-attachments/assets/a8d28bd4-d3b4-4611-86df-71078a0b094f" />
 
 
-![Figure 70: Nmap SYN Scan Behavior Before and After Enabling Snort IPS](s)
+Figure 70: Nmap SYN Scan Behavior Before and After Enabling Snort IPS
 
 <img width="720" height="433" alt="image" src="https://github.com/user-attachments/assets/5831387e-5e4b-4b0d-ad30-d7a7d4fee47c" />
 
-![Figure 71: ICMP Flood (DoS Attack) Before and After IPS Enforcement](s)
+Figure 71: ICMP Flood (DoS Attack) Before and After IPS Enforcement
 
 <img width="720" height="185" alt="image" src="https://github.com/user-attachments/assets/f3006408-cf30-4917-84c8-21aab4e02b94" />
 
-![Figure 72: SSH Brute Force Attack Execution Using Hydra](s)
+Figure 72: SSH Brute Force Attack Execution Using Hydra
 
 <img width="720" height="350" alt="image" src="https://github.com/user-attachments/assets/17dde4f8-70ee-476f-9c47-e182fb5bc770" />
 
-![Figure 73: SSH Brute Force Attack Results (Before vs After IPS)](s)
+Figure 73: SSH Brute Force Attack Results (Before vs After IPS)
 
 <img width="720" height="345" alt="image" src="https://github.com/user-attachments/assets/2b2133b3-c415-4292-a50a-807e8e9c6705" />
 
-![Figure 74: Web Vulnerability Scanning Using Nikto (Before vs After IPS)](s)
+Figure 74: Web Vulnerability Scanning Using Nikto (Before vs After IPS)
 
 <img width="720" height="333" alt="image" src="https://github.com/user-attachments/assets/bc553650-74e6-4f49-9368-b9668b83949d" />
 
-![Figure 75: Nessus Scan Results Before Enabling Snort IPS](s)
+Figure 75: Nessus Scan Results Before Enabling Snort IPS
 
 <img width="1124" height="289" alt="image" src="https://github.com/user-attachments/assets/4e916ea7-1252-4077-bcdb-c0c639120edd" />
 
 
-![Figure 76: Nessus Scan Results After Enabling Snort IPS](s)
+Figure 76: Nessus Scan Results After Enabling Snort IPS
 
 <img width="1125" height="568" alt="image" src="https://github.com/user-attachments/assets/60f52d98-8232-430d-8606-63ccd81717ac" />
 
-![Figure 77: Snort IPS Alerts During Attack Simulation](s)
+Figure 77: Snort IPS Alerts During Attack Simulation
 
 **Explanation:**
 
