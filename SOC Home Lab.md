@@ -457,33 +457,72 @@ Figure 53: System Preparation and Enabling IP Forwarding for Packet Routing
 
 Figure 54: Identifying Victim Network Interface and Interface Index on Windows
 
-![Figure 55: Configuring Default Gateway on Victim to Route Traffic via IPS](s)
+<img width="1125" height="317" alt="image" src="https://github.com/user-attachments/assets/b27931d1-f845-49e0-a064-6d2a731f7f0a" />
 
-![Figure 56: Configuring iptables to Redirect Traffic into NFQUEUE for Inline Inspection](s)
+Figure 55: Configuring Default Gateway on Victim to Route Traffic via IPS
 
-![Figure 57: Assigning Static IP Addresses and Disabling DHCP on IPS Interfaces](s)
+<img width="1125" height="515" alt="image" src="https://github.com/user-attachments/assets/dfb71a9d-8919-4649-a0a5-ce014d32ea1a" />
 
-![Figure 58: Verifying Network Interfaces and Routing Table on IPS Machine](s)
+Figure 56: Configuring iptables to Redirect Traffic into NFQUEUE for Inline Inspection
 
-![Figure 59: Configuring Attacker Routing to Forward Traffic via IPS](s)
+<img width="1125" height="397" alt="image" src="https://github.com/user-attachments/assets/ade4ad4d-b3eb-4b8d-9091-0fd18c42f857" />
 
-![Figure 60: Verifying Snort Installation and Version](s)
 
-![Figure 61: Configuring HOME_NET and EXTERNAL_NET in Snort](s)
+Figure 57: Assigning Static IP Addresses and Disabling DHCP on IPS Interfaces
 
-![Figure 62: Configuring DAQ Module for NFQUEUE Inline Mode](s)
+<img width="1125" height="514" alt="image" src="https://github.com/user-attachments/assets/8ab110a8-de91-49c4-ac21-ecef62f4cc4c" />
 
-![Figure 63: Enabling IPS Mode and Loading Custom Detection Rules](s)
 
-![Figure 64: Configuring Snort Output Modules (alert_fast and alert_json)](s)
+Figure 58: Verifying Network Interfaces and Routing Table on IPS Machine
 
-![Figure 65: Creating Log Directory and Setting Proper Permissions](s)
+<img width="1125" height="524" alt="image" src="https://github.com/user-attachments/assets/cf0df6a8-84ff-49f6-81aa-a65cdbe3a9bd" />
 
-![Figure 66: Creating Custom Snort Rules for Attack Detection and Prevention](s)
 
-![Figure 67: Running Snort in Inline IPS Mode with NFQUEUE](s)
+![Figure 59: Configuring Attacker Routing to Forward Traffic via IPS
+
+<img width="1124" height="333" alt="image" src="https://github.com/user-attachments/assets/3a3c4eb8-e60d-47ef-85af-440274b0959a" />
+
+
+![Figure 60: Verifying Snort Installation and Version
+
+<img width="1125" height="347" alt="image" src="https://github.com/user-attachments/assets/356f2ec5-62ab-4e3c-b318-bba025f25a10" />
+
+
+![Figure 61: Configuring HOME_NET and EXTERNAL_NET in Snort
+
+<img width="1125" height="468" alt="image" src="https://github.com/user-attachments/assets/35d6b3e0-fe72-4374-bacb-7ae88dd88b05" />
+
+
+![Figure 62: Configuring DAQ Module for NFQUEUE Inline Mode
+
+<img width="1125" height="460" alt="image" src="https://github.com/user-attachments/assets/9f13e96e-fa1c-4643-9592-de5c7ec7c481" />
+
+
+![Figure 63: Enabling IPS Mode and Loading Custom Detection Rules
+
+<img width="1125" height="455" alt="image" src="https://github.com/user-attachments/assets/8b682410-a3bf-4d92-9962-9af0e90d7f83" />
+
+
+Figure 64: Configuring Snort Output Modules (alert_fast and alert_json)
+
+<img width="1125" height="185" alt="image" src="https://github.com/user-attachments/assets/e222f11e-567c-4237-8e14-72104bb5277b" />
+
+Figure 65: Creating Log Directory and Setting Proper Permissions
+
+<img width="1124" height="333" alt="image" src="https://github.com/user-attachments/assets/c8a81ce1-a7a7-43c0-a86a-f6b52b4cc02b" />
+
+
+Figure 66: Creating Custom Snort Rules for Attack Detection and Prevention
+
+<img width="1125" height="336" alt="image" src="https://github.com/user-attachments/assets/912c35ed-4ab7-42bf-b9ac-224a14824140" />
+
+Figure 67: Running Snort in Inline IPS Mode with NFQUEUE
+
+<img width="1125" height="432" alt="image" src="https://github.com/user-attachments/assets/27b3f40f-a162-4510-8b3c-84179f54d49c" />
 
 ![Figure 68: Validating Traffic Blocking from Attacker (ICMP Failure)](s)
+
+<img width="1125" height="454" alt="image" src="https://github.com/user-attachments/assets/ef077f7b-0e98-4b6d-9400-11e5e866eb55" />
 
 ![Figure 69: Verifying Snort Alerts Generated from Blocked Traffic](s)
 
@@ -558,19 +597,37 @@ sudo cat /var/log/snort/alert_fast.txt
 
 ### ➤ Step 7: Attack Simulation and IPS Effectiveness Validation
 
+<img width="1125" height="498" alt="image" src="https://github.com/user-attachments/assets/a8d28bd4-d3b4-4611-86df-71078a0b094f" />
+
+
 ![Figure 70: Nmap SYN Scan Behavior Before and After Enabling Snort IPS](s)
+
+<img width="720" height="433" alt="image" src="https://github.com/user-attachments/assets/5831387e-5e4b-4b0d-ad30-d7a7d4fee47c" />
 
 ![Figure 71: ICMP Flood (DoS Attack) Before and After IPS Enforcement](s)
 
+<img width="720" height="185" alt="image" src="https://github.com/user-attachments/assets/f3006408-cf30-4917-84c8-21aab4e02b94" />
+
 ![Figure 72: SSH Brute Force Attack Execution Using Hydra](s)
+
+<img width="720" height="350" alt="image" src="https://github.com/user-attachments/assets/17dde4f8-70ee-476f-9c47-e182fb5bc770" />
 
 ![Figure 73: SSH Brute Force Attack Results (Before vs After IPS)](s)
 
+<img width="720" height="345" alt="image" src="https://github.com/user-attachments/assets/2b2133b3-c415-4292-a50a-807e8e9c6705" />
+
 ![Figure 74: Web Vulnerability Scanning Using Nikto (Before vs After IPS)](s)
 
-![Figure 77: Nessus Scan Results Before Enabling Snort IPS](s)
+<img width="720" height="333" alt="image" src="https://github.com/user-attachments/assets/bc553650-74e6-4f49-9368-b9668b83949d" />
 
-![Figure 77: Nessus Scan Results After Enabling Snort IPS](s)
+![Figure 75: Nessus Scan Results Before Enabling Snort IPS](s)
+
+<img width="1124" height="289" alt="image" src="https://github.com/user-attachments/assets/4e916ea7-1252-4077-bcdb-c0c639120edd" />
+
+
+![Figure 76: Nessus Scan Results After Enabling Snort IPS](s)
+
+<img width="1125" height="568" alt="image" src="https://github.com/user-attachments/assets/60f52d98-8232-430d-8606-63ccd81717ac" />
 
 ![Figure 77: Snort IPS Alerts During Attack Simulation](s)
 
