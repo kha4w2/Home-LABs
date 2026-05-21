@@ -24,7 +24,8 @@ Download an official Windows 10 ISO via the Media Creation Tool, configure a new
 
 **Step 1 — Select "Create installation media"**
 
-![Select Create installation media](https://i.imgur.com/placeholder1.png)
+<img width="975" height="859" alt="image" src="https://github.com/user-attachments/assets/ab187a9d-a3d7-4c6f-9936-5e01dd35b597" />
+
 
 > In the Media Creation Tool, choose **Create installation media (USB flash drive, DVD, or ISO file) for another PC**, then click **Next**.
 
@@ -32,7 +33,8 @@ Download an official Windows 10 ISO via the Media Creation Tool, configure a new
 
 **Step 2 — Choose ISO file as the media type**
 
-![Choose ISO file](https://i.imgur.com/placeholder2.png)
+<img width="975" height="856" alt="image" src="https://github.com/user-attachments/assets/789c6c1b-748d-4bd0-b8c7-978fff782ff4" />
+
 
 > Select **ISO file** and click **Next**. Choose a save location on your machine.
 
@@ -40,7 +42,11 @@ Download an official Windows 10 ISO via the Media Creation Tool, configure a new
 
 **Step 3 — ISO download complete**
 
-![ISO download complete](https://i.imgur.com/placeholder3.png)
+<img width="975" height="609" alt="image" src="https://github.com/user-attachments/assets/24c6de39-896c-494e-bcfe-4b8b1ff18513" />
+<img width="975" height="856" alt="image" src="https://github.com/user-attachments/assets/0b3a6018-6297-4ffd-aa00-4bd53722422f" />
+<img width="975" height="870" alt="image" src="https://github.com/user-attachments/assets/91584f72-253b-4efa-8167-e807a3bf2099" />
+
+
 
 > Once the download finishes, the tool confirms the ISO path. Click **Finish**.
 
@@ -48,7 +54,6 @@ Download an official Windows 10 ISO via the Media Creation Tool, configure a new
 
 **Step 4 — Note the ISO file path**
 
-![Note the ISO file path](https://i.imgur.com/placeholder4.png)
 
 > Keep the ISO file path handy (e.g., `D:\Vm\ISOs\Windows 10\...`). You'll need it when configuring the VM.
 
@@ -58,7 +63,7 @@ Download an official Windows 10 ISO via the Media Creation Tool, configure a new
 
 **Step 5 — Launch VMware and create a new VM**
 
-![Create a new virtual machine in VMware](https://i.imgur.com/placeholder5.png)
+<img width="975" height="266" alt="image" src="https://github.com/user-attachments/assets/c0137de2-650c-4df8-a0e2-d92aba2998c2" />
 
 > Open VMware Workstation Pro 17 and click **Create a New Virtual Machine**.
 
@@ -66,7 +71,7 @@ Download an official Windows 10 ISO via the Media Creation Tool, configure a new
 
 **Step 6 — Select "Typical" configuration**
 
-![Select Typical configuration](https://i.imgur.com/placeholder6.png)
+<img width="628" height="663" alt="image" src="https://github.com/user-attachments/assets/db37cb1d-2c9b-465f-bba6-2566b4058c57" />
 
 > Choose **Typical (recommended)** and click **Next**.
 
@@ -74,7 +79,7 @@ Download an official Windows 10 ISO via the Media Creation Tool, configure a new
 
 **Step 7 — Defer OS installation**
 
-![Install OS later](https://i.imgur.com/placeholder7.png)
+<img width="621" height="664" alt="image" src="https://github.com/user-attachments/assets/7a0dc979-dc25-4985-a7ef-32a842e59cb8" />
 
 > Select **I will install the operating system later** so the VM is created with a blank disk. Click **Next**.
 
@@ -82,7 +87,7 @@ Download an official Windows 10 ISO via the Media Creation Tool, configure a new
 
 **Step 8 — Select Windows 10 x64 as the guest OS**
 
-![Select Windows 10 x64](https://i.imgur.com/placeholder8.png)
+<img width="623" height="658" alt="image" src="https://github.com/user-attachments/assets/86c41e23-edfd-4a7f-86ea-9a175b1a4693" />
 
 > Set the guest OS to **Microsoft Windows** and the version to **Windows 10 x64**. Click **Next**.
 
@@ -90,7 +95,7 @@ Download an official Windows 10 ISO via the Media Creation Tool, configure a new
 
 **Step 9 — Name the VM and set the save location**
 
-![Name the VM](https://i.imgur.com/placeholder9.png)
+<img width="614" height="653" alt="image" src="https://github.com/user-attachments/assets/b70e336a-89a0-43cd-ad27-55d800626160" />
 
 > Give the VM a name (e.g., `Windows10`) and choose a storage path. Click **Next**.
 
@@ -98,7 +103,7 @@ Download an official Windows 10 ISO via the Media Creation Tool, configure a new
 
 **Step 10 — Set disk capacity to 100 GB**
 
-![Set disk capacity](https://i.imgur.com/placeholder10.png)
+<img width="634" height="675" alt="image" src="https://github.com/user-attachments/assets/c0afe3b1-1148-45d3-bb03-6901c6186fcc" />
 
 > Set the maximum disk size to **100 GB** and choose **Split virtual disk into multiple files**. Click **Next**.
 
@@ -106,7 +111,7 @@ Download an official Windows 10 ISO via the Media Creation Tool, configure a new
 
 **Step 11 — Attach the ISO to the virtual CD/DVD drive**
 
-![Attach the ISO](https://i.imgur.com/placeholder11.png)
+<img width="975" height="978" alt="image" src="https://github.com/user-attachments/assets/f033465d-4f70-464c-8ea0-245866d5a862" />
 
 > Open **VM Settings → CD/DVD (SATA)**, select **Use ISO image file**, browse to the downloaded ISO, and click **OK**.
 
@@ -116,7 +121,7 @@ Download an official Windows 10 ISO via the Media Creation Tool, configure a new
 
 **Step 12 — Skip the product key**
 
-![Skip product key](https://i.imgur.com/placeholder12.png)
+<img width="975" height="603" alt="image" src="https://github.com/user-attachments/assets/7cd56440-8609-46c7-b242-2d851f41024b" />
 
 > When prompted for a product key, click **I don't have a product key** to proceed with an unactivated install.
 
@@ -124,7 +129,7 @@ Download an official Windows 10 ISO via the Media Creation Tool, configure a new
 
 **Step 13 — Select Windows 10 Pro**
 
-![Select Windows 10 Pro](https://i.imgur.com/placeholder13.png)
+
 
 > Choose **Windows 10 Pro (x64)** from the edition list and click **Next**.
 
@@ -132,7 +137,6 @@ Download an official Windows 10 ISO via the Media Creation Tool, configure a new
 
 **Step 14 — Choose "Custom" installation**
 
-![Choose Custom installation](https://i.imgur.com/placeholder14.png)
 
 > Select **Custom: Install Windows only (advanced)** for a clean install.
 
