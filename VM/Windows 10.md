@@ -112,6 +112,8 @@ Download an official Windows 10 ISO via the Media Creation Tool, configure a new
 **Step 11 — Attach the ISO to the virtual CD/DVD drive**
 
 <img width="975" height="978" alt="image" src="https://github.com/user-attachments/assets/f033465d-4f70-464c-8ea0-245866d5a862" />
+<img width="975" height="603" alt="image" src="https://github.com/user-attachments/assets/7cd56440-8609-46c7-b242-2d851f41024b" />
+
 
 > Open **VM Settings → CD/DVD (SATA)**, select **Use ISO image file**, browse to the downloaded ISO, and click **OK**.
 
@@ -120,8 +122,8 @@ Download an official Windows 10 ISO via the Media Creation Tool, configure a new
 ### Part 3 — Install Windows 10
 
 **Step 12 — Skip the product key**
+<img width="975" height="752" alt="image" src="https://github.com/user-attachments/assets/396862f2-53d2-4556-9081-43fe9afea849" />
 
-<img width="975" height="603" alt="image" src="https://github.com/user-attachments/assets/7cd56440-8609-46c7-b242-2d851f41024b" />
 
 > When prompted for a product key, click **I don't have a product key** to proceed with an unactivated install.
 
@@ -129,7 +131,9 @@ Download an official Windows 10 ISO via the Media Creation Tool, configure a new
 
 **Step 13 — Select Windows 10 Pro**
 
+<img width="806" height="606" alt="image" src="https://github.com/user-attachments/assets/52166351-cb68-4e43-b693-62e3adc9444f" />
 
+<img width="846" height="669" alt="image" src="https://github.com/user-attachments/assets/27e42e74-50ec-479c-9758-20f47e44e81f" />
 
 > Choose **Windows 10 Pro (x64)** from the edition list and click **Next**.
 
@@ -137,6 +141,7 @@ Download an official Windows 10 ISO via the Media Creation Tool, configure a new
 
 **Step 14 — Choose "Custom" installation**
 
+<img width="801" height="609" alt="image" src="https://github.com/user-attachments/assets/893da3c7-27ab-422d-91c3-41976edfecba" />
 
 > Select **Custom: Install Windows only (advanced)** for a clean install.
 
@@ -144,31 +149,27 @@ Download an official Windows 10 ISO via the Media Creation Tool, configure a new
 
 **Step 15 — Select the unallocated drive**
 
-![Select unallocated drive](https://i.imgur.com/placeholder15.png)
+<img width="875" height="689" alt="image" src="https://github.com/user-attachments/assets/7b5db6c4-cb4e-46fb-ab20-03f13b60480b" />
+<img width="794" height="588" alt="image" src="https://github.com/user-attachments/assets/0fc33300-74ed-4d36-aba3-716442d52a38" />
+
 
 > Select **Drive 0 Unallocated Space** and click **Next** to begin partitioning and installation.
 
 ---
 
-**Step 16 — Windows installation in progress**
-
-![Installation in progress](https://i.imgur.com/placeholder16.png)
-
-> Setup copies files, installs features and updates. This takes several minutes — no action needed.
 
 ---
 
-**Step 17 — Automatic restart**
+**Step 16 — Automatic restart**
 
-![Automatic restart](https://i.imgur.com/placeholder17.png)
 
 > Windows restarts automatically to finalize the installation. Let it complete.
 
 ---
 
-**Step 18 — Windows 10 desktop ready**
+**Step 17 — Windows 10 desktop ready**
 
-![Windows 10 desktop](https://i.imgur.com/placeholder18.png)
+<img width="975" height="453" alt="image" src="https://github.com/user-attachments/assets/0d00b76a-1086-49d4-aa75-d98f0e181863" />
 
 > The Windows 10 desktop loads — your VM is up and running. 🎉
 
