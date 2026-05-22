@@ -94,10 +94,11 @@ Before deploying Active Directory, both virtual machines must be networked corre
 Each virtual machine is assigned the correct network adapter type inside VMware Workstation settings. The Server gets two adapters; the client gets one. This creates an isolated internal network while giving the server internet access through the physical machine.
 
 **Figure 1 — Windows Server 2019: Bridged Adapter (Internet)**
-![Figure 1](images/image1.png)
+<img width="975" height="980" alt="image" src="https://github.com/user-attachments/assets/dabc9079-bf1e-48ee-9131-6b710f4b799d" />
+
 
 **Figure 2 — Windows Server 2019: LAN Segment Adapter (Internal Network)**
-![Figure 2](images/image2.png)
+<img width="975" height="980" alt="image" src="https://github.com/user-attachments/assets/efbf60f4-1e6a-4254-988e-e107179ff40b" />
 
 ---
 
@@ -106,7 +107,7 @@ Each virtual machine is assigned the correct network adapter type inside VMware 
 After booting Windows Server 2019, Server Manager opens automatically. The initial state shows the machine in WORKGROUP with no domain, and both network adapters visible. Three configurations are required before promotion: time zone, machine name, and static IP on the LAN adapter.
 
 **Figure 3 — Server Manager Local Server: Initial State Before Configuration**
-![Figure 3](images/image3.png)
+<img width="975" height="980" alt="image" src="https://github.com/user-attachments/assets/3336c48b-43ee-46ca-a66d-782dac11d35b" />
 
 ---
 
@@ -115,13 +116,13 @@ After booting Windows Server 2019, Server Manager opens automatically. The initi
 The LAN-5 (internal) adapter is configured with a static IP address so it can serve as a reliable gateway and DNS server for the Windows 10 client. The Bridged adapter is left as DHCP to receive internet from the physical network.
 
 **Figure 4 — Opening Network Connections via Network and Sharing Center**
-![Figure 4](images/image4.png)
+<img width="975" height="505" alt="image" src="https://github.com/user-attachments/assets/a58f4d55-24a6-41db-bc98-7d670a08e458" />
 
 **Figure 5 — Accessing IPv4 Properties on the LAN-5 Adapter**
-![Figure 5](images/image5.png)
+<img width="975" height="500" alt="image" src="https://github.com/user-attachments/assets/ed316126-0ebe-47e6-a36f-632e7f868209" />
 
 **Figure 6 — Static IP Configuration: 192.168.10.1 / DNS: 127.0.0.1**
-![Figure 6](images/image6.png)
+<img width="975" height="466" alt="image" src="https://github.com/user-attachments/assets/9357c5ce-1b31-4c3b-b057-3f0123d63b1d" />
 
 ---
 
@@ -130,7 +131,7 @@ The LAN-5 (internal) adapter is configured with a static IP address so it can se
 After applying the static IP, Server Manager reflects the updated network state. The Internet adapter shows DHCP (internet access) and LAN-5 shows the assigned static IP.
 
 **Figure 7 — Server Manager Confirming Dual Adapter Configuration**
-![Figure 7](images/image7.png)
+<img width="975" height="506" alt="image" src="https://github.com/user-attachments/assets/f81d578d-3691-4a59-a0f9-f933156ff0a0" />
 
 ---
 
@@ -139,10 +140,10 @@ After applying the static IP, Server Manager reflects the updated network state.
 The Windows 10 client is configured with a static IP in the same subnet as the server's LAN adapter, pointing to the server as both gateway and DNS. Connectivity is confirmed by pinging the DC's LAN IP.
 
 **Figure 8 — Windows 10 Static IP Configuration Pointing to DC**
-![Figure 8](images/image8.png)
+<img width="975" height="509" alt="image" src="https://github.com/user-attachments/assets/3d2e362c-bee7-4c38-b7a8-501247db8003" />
 
 **Figure 9 — Successful Ping from Windows 10 to Domain Controller (0% Packet Loss)**
-![Figure 9](images/image9.png)
+<img width="975" height="380" alt="image" src="https://github.com/user-attachments/assets/431168c4-55cb-43cf-ada1-c2bd6ab099f6" />
 
 > ✅ Phase 1 Complete — Network is fully operational. Both machines communicate over LAN-5 and the server has internet access via the Bridged adapter.
 
@@ -159,7 +160,7 @@ With networking in place, the Windows Server 2019 machine is promoted to a Domai
 The AD DS role was previously installed. The post-deployment notification in Server Manager triggers the promotion wizard.
 
 **Figure 10 — Server Manager Post-Deployment Notification: Promote to Domain Controller**
-![Figure 10](images/image10.png)
+<img width="975" height="469" alt="image" src="https://github.com/user-attachments/assets/56338cc6-36d4-4ad9-a065-5f779280253c" />
 
 ---
 
@@ -168,7 +169,7 @@ The AD DS role was previously installed. The post-deployment notification in Ser
 The wizard is set to create a new forest. The root domain name is set to `GBG.local`, which will serve as the on-premises domain throughout the lab.
 
 **Figure 11 — AD DS Configuration Wizard: Add a New Forest — Root Domain: GBG.local**
-![Figure 11](images/image11.png)
+<img width="975" height="470" alt="image" src="https://github.com/user-attachments/assets/e19136f3-1e3a-4d6d-806c-163fcce9dcb5" />
 
 ---
 
@@ -177,7 +178,7 @@ The wizard is set to create a new forest. The root domain name is set to `GBG.lo
 Forest and domain functional levels are set to Windows Server 2016. DNS Server and Global Catalog are enabled. The DSRM recovery password is configured.
 
 **Figure 12 — Domain Controller Options: Functional Levels, DNS, GC, and DSRM Password**
-![Figure 12](images/image12.png)
+<img width="975" height="464" alt="image" src="https://github.com/user-attachments/assets/26197de0-1d94-427e-8866-3701e5f2fd6a" />
 
 ---
 
@@ -186,10 +187,10 @@ Forest and domain functional levels are set to Windows Server 2016. DNS Server a
 All prerequisite checks pass successfully. Warnings about static IP and DNS delegation are expected in a lab environment and do not block installation. The Install button is clicked and the server reboots automatically.
 
 **Figure 13 — Prerequisites Check Passed: All Checks Successful — Ready to Install**
-![Figure 13](images/image13.png)
+<img width="965" height="708" alt="image" src="https://github.com/user-attachments/assets/4334170f-5600-498e-aa06-e0883dfbad4e" />
 
 **Figure 14 — Server Restarting After Domain Controller Promotion**
-![Figure 14](images/image14.png)
+<img width="975" height="903" alt="image" src="https://github.com/user-attachments/assets/7b13736e-1077-4b10-a0a5-b506a01f9d10" />
 
 ---
 
@@ -198,7 +199,7 @@ All prerequisite checks pass successfully. Warnings about static IP and DNS dele
 After reboot, Server Manager confirms the machine is now a member of the `GBG.local` domain, no longer in WORKGROUP. Both adapters remain configured correctly.
 
 **Figure 15 — Server Manager Confirming Domain: GBG.local — DC Promotion Successful**
-![Figure 15](images/image15.png)
+<img width="975" height="465" alt="image" src="https://github.com/user-attachments/assets/849f207c-a69b-4129-9f77-45ee8fa0ebe0" />
 
 > ✅ Phase 2 Complete — PDC19 is now a fully operational Domain Controller for GBG.local.
 
@@ -215,7 +216,8 @@ With the domain established, the AD structure is built: three OUs are created, u
 ADUC is launched from Server Manager Tools. The GBG.local domain is visible with its default containers.
 
 **Figure 16 — Server Manager Tools Menu: Launching Active Directory Users and Computers**
-![Figure 16](images/image16.png)
+<img width="975" height="467" alt="image" src="https://github.com/user-attachments/assets/808419a2-74ae-4f93-8f98-234ebaddf4b2" />
+
 
 ---
 
@@ -224,10 +226,10 @@ ADUC is launched from Server Manager Tools. The GBG.local domain is visible with
 Three OUs are created directly under GBG.local to reflect a realistic department structure: Security_Team, IT_Team, and HR_Team.
 
 **Figure 17 — ADUC: Creating a New Organizational Unit Under GBG.local**
-![Figure 17](images/image17.png)
+<img width="975" height="712" alt="image" src="https://github.com/user-attachments/assets/bdd297fa-c30f-417f-aa54-5a5a7120c748" />
 
 **Figure 18 — ADUC: Three OUs Created — Security_Team, IT_Team, HR_Team**
-![Figure 18](images/image18.png)
+<img width="975" height="570" alt="image" src="https://github.com/user-attachments/assets/529e2137-3def-468f-bee3-a3de2785d268" />
 
 ---
 
@@ -235,11 +237,13 @@ Three OUs are created directly under GBG.local to reflect a realistic department
 
 Users are created inside the Security_Team OU using the ADUC new user wizard. Three users are provisioned: Ahmed Elgohary, Basel Ali, and Clara Mohamed.
 
+<img width="975" height="570" alt="image" src="https://github.com/user-attachments/assets/abf055a7-c8ee-4cb0-afff-96f526bcef49" />
+
 **Figure 19 — ADUC: Creating a New User Inside the Security_Team OU**
-![Figure 19](images/image19.png)
+
+<img width="675" height="578" alt="image" src="https://github.com/user-attachments/assets/8790ca38-e2f9-4e91-a267-9c7d05f710f8" />
 
 **Figure 20 — Security_Team OU: Three Users and Two Security Groups Populated**
-![Figure 20](images/image20.png)
 
 ---
 
