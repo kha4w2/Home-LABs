@@ -432,13 +432,13 @@ In the Entra ID blade, Microsoft Entra Connect is found under the hybrid identit
 
 ---
 
-![Figure 33](figures/figure33.png)
+<img width="975" height="321" alt="image" src="https://github.com/user-attachments/assets/4de3c50f-ddbc-495e-94d9-fd335d8af45d" />
 
 *Figure 33 — Entra Connect blade showing current sync status and the download option for the latest version*
 
 ---
 
-![Figure 34](figures/figure34.png)
+<img width="975" height="157" alt="image" src="https://github.com/user-attachments/assets/e3ab29c9-4852-4e01-a0c5-ab9459475658" />
 
 *Figure 34 — Recent download history showing AzureADConnect.msi ready for installation*
 
@@ -450,25 +450,25 @@ Before installing Entra Connect, the Hybrid Identity Administrator role must be 
 
 ---
 
-![Figure 35](figures/figure35.png)
+<img width="975" height="389" alt="image" src="https://github.com/user-attachments/assets/f10763eb-f6bc-4f7b-bbd3-31d900aeed87" />
 
 *Figure 35 — PIM My Roles view listing eligible assignments including Hybrid Identity Administrator*
 
 ---
 
-![Figure 36](figures/figure36.png)
+<img width="975" height="487" alt="image" src="https://github.com/user-attachments/assets/ea70bcf5-610e-4d91-a5d2-ed28994f7beb" />
 
 *Figure 36 — Hybrid Identity Administrator role activation dialog with duration and justification fields*
 
 ---
 
-![Figure 37](figures/figure37.png)
+<img width="975" height="479" alt="image" src="https://github.com/user-attachments/assets/0680d5ec-b9dd-4f22-bc99-dfde9115d054" />
 
 *Figure 37 — PIM processing the role activation request across three validation stages*
 
 ---
 
-![Figure 38](figures/figure38.png)
+<img width="975" height="345" alt="image" src="https://github.com/user-attachments/assets/08ff0b19-2cb4-4985-97c2-6d844f42a228" />
 
 *Figure 38 — Assigned roles view confirming Hybrid Identity Administrator is now actively assigned*
 
@@ -480,13 +480,13 @@ The Entra Connect installer is launched on the domain controller. Express settin
 
 ---
 
-![Figure 39](figures/figure39.png)
+<img width="975" height="466" alt="image" src="https://github.com/user-attachments/assets/314cc6e6-ce09-45cf-9d40-e6ddd2c2134c" />
 
 *Figure 39 — Microsoft Entra Connect Sync welcome screen with license agreement accepted*
 
 ---
 
-![Figure 40](figures/figure40.png)
+<img width="975" height="506" alt="image" src="https://github.com/user-attachments/assets/25115809-4bf5-4294-b01c-d59327ea1e04" />
 
 *Figure 40 — Express Settings page noting that GBG.local is non-routable and recommending custom settings*
 
@@ -498,13 +498,13 @@ The wizard prompts for cloud credentials (Hybrid Identity Administrator account)
 
 ---
 
-![Figure 41](figures/figure41.png)
+<img width="975" height="679" alt="image" src="https://github.com/user-attachments/assets/fe19e096-1c61-4615-a845-769d5669cbd2" />
 
 *Figure 41 — Cloud credential entry using the khaled@gbgacademy.online Hybrid Identity Administrator account*
 
 ---
 
-![Figure 42](figures/figure42.png)
+<img width="975" height="681" alt="image" src="https://github.com/user-attachments/assets/30c73489-4fd0-4f0e-81f6-81bb99158f0b" />
 
 *Figure 42 — On-premises AD DS credential entry using the GBG\Administrator enterprise account*
 
@@ -516,7 +516,7 @@ The wizard displays a UPN suffix mapping table. The `gbgacademy.online` suffix i
 
 ---
 
-![Figure 43](figures/figure43.png)
+<img width="975" height="690" alt="image" src="https://github.com/user-attachments/assets/02b5dc57-d8c1-4833-b502-36dd07a944f8" />
 
 *Figure 43 — UPN suffix mapping table confirming gbgacademy.online as verified in Entra ID*
 
@@ -528,13 +528,13 @@ The configuration summary is reviewed and installation is executed. After comple
 
 ---
 
-![Figure 44](figures/figure44.png)
+<img width="975" height="693" alt="image" src="https://github.com/user-attachments/assets/a43987cf-ba30-4754-89ec-80ea2703e102" />
 
 *Figure 44 — Ready to Configure summary listing all actions Entra Connect will perform*
 
 ---
 
-![Figure 45](figures/figure45.png)
+<img width="823" height="459" alt="image" src="https://github.com/user-attachments/assets/1d777f5a-c33f-4623-9f88-6f24f697214b" />
 
 *Figure 45 — PowerShell confirming ADSync service is running and initial sync cycle completed successfully*
 
@@ -552,19 +552,19 @@ The Azure Portal is checked to confirm that the SOC and GRC security groups have
 
 ---
 
-![Figure 46](figures/figure46.png)
+<img width="975" height="276" alt="image" src="https://github.com/user-attachments/assets/3fce0c81-4205-4d8d-8b36-067970f2202c" />
 
 *Figure 46 — Entra ID All Groups view showing the SOC group synced from on-premises Active Directory*
 
 ---
 
-![Figure 47](figures/figure47.png)
+<img width="975" height="329" alt="image" src="https://github.com/user-attachments/assets/f4d9d786-d1a8-41f9-b788-f064ccfced81" />
 
 *Figure 47 — SOC group members in Entra ID: Ahmed Elgohary, Basel Ali, and Khaled — all confirmed as synced*
 
 ---
 
-![Figure 48](figures/figure48.png)
+<img width="975" height="272" alt="image" src="https://github.com/user-attachments/assets/c063c3e0-e4b5-4ffb-93f9-1fb9a5280909" />
 
 *Figure 48 — GRC group members in Entra ID showing Clara Mohamed successfully synced from on-premises AD*
 
@@ -576,19 +576,19 @@ The Windows 10 machine is joined to `GBG.local` using System Properties. Enterpr
 
 ---
 
-![Figure 49](figures/figure49.png)
+<img width="975" height="443" alt="image" src="https://github.com/user-attachments/assets/23836a86-20c5-4862-9d62-15b057e44d76" />
 
 *Figure 49 — Windows 10 System Properties showing domain join field with GBG.local entered*
 
 ---
 
-![Figure 50](figures/figure50.png)
+<img width="576" height="371" alt="image" src="https://github.com/user-attachments/assets/c7661a8b-eaf8-4438-b091-f9a690b900c6" />
 
 *Figure 50 — Domain join credential prompt requesting GBG\Administrator credentials*
 
 ---
 
-![Figure 51](figures/figure51.png)
+<img width="340" height="183" alt="image" src="https://github.com/user-attachments/assets/406e5874-0983-4cbd-9f38-50b8589c8e14" />
 
 *Figure 51 — Confirmation dialog welcoming the machine to the GBG.local domain*
 
@@ -600,19 +600,19 @@ After the join, the computer object `KHALEDELGOHARY` appears in the default Comp
 
 ---
 
-![Figure 52](figures/figure52.png)
+<img width="975" height="534" alt="image" src="https://github.com/user-attachments/assets/1d075d4b-9ef9-4f59-ad36-edad595192a0" />
 
 *Figure 52 — ADUC showing the KHALEDELGOHARY computer object in the default Computers container*
 
 ---
 
-![Figure 53](figures/figure53.png)
+<img width="500" height="565" alt="image" src="https://github.com/user-attachments/assets/693631ff-da6b-472d-b869-4cbca0935d61" />
 
 *Figure 53 — Move dialog with Security_Team selected as the destination container*
 
 ---
 
-![Figure 54](figures/figure54.png)
+<img width="975" height="551" alt="image" src="https://github.com/user-attachments/assets/78e3ae12-3ab1-49b8-ac46-d6b2bc9f1c50" />
 
 *Figure 54 — Security_Team OU containing all users, groups, and the domain-joined computer object*
 
@@ -624,7 +624,7 @@ The lab concludes with a side-by-side view confirming complete hybrid identity s
 
 ---
 
-![Figure 55](figures/figure55.png)
+<img width="975" height="518" alt="image" src="https://github.com/user-attachments/assets/e71247f8-4119-41e7-a773-178c52fe3ded" />
 
 *Figure 55 — Final state: Windows 10 logged in with hybrid credentials, Entra ID reflecting 66 synced users, and SOC group membership fully verified in the cloud*
 
