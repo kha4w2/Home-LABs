@@ -112,13 +112,13 @@ The Windows Server VM is configured with two network adapters. The first is a Br
 
 ---
 
-![Figure 1](figures/figure01.png)
+<img width="975" height="980" alt="image" src="https://github.com/user-attachments/assets/8573e8c0-4220-407e-a19f-d9e1a8b4af35" />
 
 *Figure 1 — First network adapter configured as Bridged, connecting the server directly to the physical network*
 
 ---
 
-![Figure 2](figures/figure02.png)
+<img width="975" height="1003" alt="image" src="https://github.com/user-attachments/assets/f1e6431c-46db-4ac7-87f6-4bb4033fc99a" />
 
 *Figure 2 — Second network adapter added and set to LAN-5, establishing the isolated internal segment*
 
@@ -130,31 +130,31 @@ Inside Server Manager under Local Server, the LAN-5 adapter (Ethernet 1) is assi
 
 ---
 
-![Figure 3](figures/figure03.png)
+<img width="975" height="480" alt="image" src="https://github.com/user-attachments/assets/248aac8b-658f-47bd-81e8-b6b3996fd782" />
 
 *Figure 3 — Server Manager Local Server overview prior to network configuration*
 
 ---
 
-![Figure 4](figures/figure04.png)
+<img width="975" height="505" alt="image" src="https://github.com/user-attachments/assets/6a0dfd45-6c6c-408a-9e7d-9ea080ffba68" />
 
 *Figure 4 — Network Connections panel showing both adapters: the Bridged internet adapter and the LAN-5 internal adapter*
 
 ---
 
-![Figure 5](figures/figure05.png)
+<img width="975" height="500" alt="image" src="https://github.com/user-attachments/assets/d815e6b6-6f87-4186-a53c-519b776b8187" />
 
 *Figure 5 — Ethernet properties dialog open for the LAN-5 interface, ready for static IP assignment*
 
 ---
 
-![Figure 6](figures/figure06.png)
+<img width="975" height="466" alt="image" src="https://github.com/user-attachments/assets/5ca33e8d-2116-4cc1-9de8-9b84c1d48c24" />
 
 *Figure 6 — Static IP address 192.168.10.1 assigned to the LAN-5 adapter with DNS set to loopback*
 
 ---
 
-![Figure 7](figures/figure07.png)
+<img width="975" height="506" alt="image" src="https://github.com/user-attachments/assets/e41c5c5e-b78c-48f0-b758-ce98763b28ee" />
 
 *Figure 7 — Server Manager reflecting the updated LAN-5 IP address after successful static configuration*
 
@@ -166,7 +166,7 @@ The Windows 10 VM is configured with a static IP of `192.168.10.20`, pointing to
 
 ---
 
-![Figure 8](figures/figure08.png)
+<img width="975" height="509" alt="image" src="https://github.com/user-attachments/assets/2227d70a-7636-4bb3-abf1-6b7f6fbb5f9a" />
 
 *Figure 8 — Windows 10 IPv4 properties configured with static IP 192.168.10.20 and gateway 192.168.10.1*
 
@@ -178,7 +178,7 @@ A ping test from the Windows 10 client to the server IP confirms successful bidi
 
 ---
 
-![Figure 9](figures/figure09.png)
+<img width="975" height="380" alt="image" src="https://github.com/user-attachments/assets/710450a1-3928-4f89-be92-8b724eba18ed" />
 
 *Figure 9 — Successful ping to 192.168.10.1 from the Windows 10 client, confirming network connectivity*
 
@@ -196,7 +196,7 @@ After installing the AD DS role, Server Manager displays a post-deployment confi
 
 ---
 
-![Figure 10](figures/figure10.png)
+<img width="975" height="469" alt="image" src="https://github.com/user-attachments/assets/282de0ce-9f8f-490b-8e0e-d2f04e681e05" />
 
 *Figure 10 — Server Manager post-deployment notification prompting domain controller promotion*
 
@@ -208,7 +208,7 @@ In the wizard, "Add a new forest" is selected with `GBG.local` set as the root d
 
 ---
 
-![Figure 11](figures/figure11.png)
+<img width="975" height="470" alt="image" src="https://github.com/user-attachments/assets/95feecec-f20c-4a32-bdff-6b08b6f403ef" />
 
 *Figure 11 — Deployment Configuration step with "Add a new forest" selected and root domain set to GBG.local*
 
@@ -220,7 +220,7 @@ The forest and domain functional levels are both set to Windows Server 2016. The
 
 ---
 
-![Figure 12](figures/figure12.png)
+<img width="975" height="464" alt="image" src="https://github.com/user-attachments/assets/a54fd241-199c-4875-b7b6-faed1cc9a026" />
 
 *Figure 12 — Domain Controller Options with DNS server and Global Catalog enabled, functional level set to Windows Server 2016*
 
@@ -232,13 +232,13 @@ The wizard completes its prerequisites check successfully. The server is then pr
 
 ---
 
-![Figure 13](figures/figure13.png)
+<img width="965" height="708" alt="image" src="https://github.com/user-attachments/assets/4aa2408b-4a39-49e6-a0d7-9b358bc8c6bc" />
 
 *Figure 13 — Prerequisites check passed with informational warnings; ready for installation*
 
 ---
 
-![Figure 14](figures/figure14.png)
+<img width="975" height="903" alt="image" src="https://github.com/user-attachments/assets/6dfe5f01-407e-4490-bf2c-40c27f9a0318" />
 
 *Figure 14 — Server rebooting as part of the domain controller promotion process*
 
@@ -250,7 +250,7 @@ After reboot, Server Manager confirms the server is now a member of `GBG.local` 
 
 ---
 
-![Figure 15](figures/figure15.png)
+<img width="975" height="465" alt="image" src="https://github.com/user-attachments/assets/e72d9cef-cf40-435c-97cf-6e98cfc35ed3" />
 
 *Figure 15 — Server Manager Local Server showing domain joined as GBG.local, confirming successful promotion*
 
@@ -268,7 +268,7 @@ From Server Manager's Tools menu, Active Directory Users and Computers (ADUC) is
 
 ---
 
-![Figure 16](figures/figure16.png)
+<img width="975" height="467" alt="image" src="https://github.com/user-attachments/assets/438605f3-d798-4324-9be6-0e195c5751f1" />
 
 *Figure 16 — Server Manager Tools menu with Active Directory Users and Computers highlighted*
 
@@ -280,13 +280,13 @@ Three Organizational Units are created under the GBG.local domain: `Security_Tea
 
 ---
 
-![Figure 17](figures/figure17.png)
+<img width="975" height="712" alt="image" src="https://github.com/user-attachments/assets/e1655dc2-dce0-42c5-88c7-8910ba44e5fe" />
 
 *Figure 17 — Right-click context menu in ADUC with the New > Organizational Unit option selected*
 
 ---
 
-![Figure 18](figures/figure18.png)
+<img width="975" height="570" alt="image" src="https://github.com/user-attachments/assets/6c8ccf8a-07c2-48fc-a78e-010268e8f2d9" />
 
 *Figure 18 — ADUC tree view showing the three newly created OUs: Security_Team, IT_Team, and HR_Team*
 
@@ -298,19 +298,19 @@ Users are created inside the appropriate OUs. The user creation wizard captures 
 
 ---
 
-![Figure 19](figures/figure19.png)
+<img width="975" height="723" alt="image" src="https://github.com/user-attachments/assets/d6311696-0c36-4596-bd2f-befe3bd85745" />
 
 *Figure 19 — New user creation initiated inside the Security_Team OU*
 
 ---
 
-![Figure 20](figures/figure20.png)
+<img width="675" height="578" alt="image" src="https://github.com/user-attachments/assets/27e4291a-31c5-4892-833f-40656c7e2bb6" />
 
 *Figure 20 — User creation form filled with details for Ahmed Elgohary, UPN set to Ahmed.Elgohary@GBG.local*
 
 ---
 
-![Figure 21](figures/figure21.png)
+<img width="928" height="489" alt="image" src="https://github.com/user-attachments/assets/670bfffe-c5a5-40ea-a688-cdcef92f1a6b" />
 
 *Figure 21 — Security_Team OU populated with three users: Ahmed Elgohary, Basel Ali, and Clara Mohamed*
 
@@ -322,13 +322,13 @@ Two security groups — `SOC` and `GRC` — are created inside the `Security_Tea
 
 ---
 
-![Figure 22](figures/figure22.png)
+<img width="941" height="489" alt="image" src="https://github.com/user-attachments/assets/41e1b9ad-9909-45b0-8c36-e024d20beac6" />
 
 *Figure 22 — New group creation initiated inside the Security_Team OU*
 
 ---
 
-![Figure 23](figures/figure23.png)
+<img width="975" height="493" alt="image" src="https://github.com/user-attachments/assets/f142a60a-a69b-477f-91d1-ef6eba8a62b7" />
 
 *Figure 23 — Security_Team OU now containing three users alongside the SOC and GRC security groups*
 
@@ -340,13 +340,13 @@ Users are added to their respective groups. The SOC group receives Ahmed Elgohar
 
 ---
 
-![Figure 24](figures/figure24.png)
+<img width="703" height="388" alt="image" src="https://github.com/user-attachments/assets/0a63405f-15b6-4726-b795-c9ce090b1520" />
 
 *Figure 24 — Member selection dialog used to add Clara Mohamed to the GRC group*
 
 ---
 
-![Figure 25](figures/figure25.png)
+<img width="663" height="748" alt="image" src="https://github.com/user-attachments/assets/c3a5f41b-f099-486c-b622-96b346aab558" />
 
 *Figure 25 — SOC group properties showing three members: Ahmed Elgohary, Basel Ali, and Khaled Elgohary*
 
@@ -364,19 +364,19 @@ Using Active Directory Domains and Trusts, the alternative UPN suffix `gbgacadem
 
 ---
 
-![Figure 26](figures/figure26.png)
+<img width="975" height="446" alt="image" src="https://github.com/user-attachments/assets/45dd39a0-de77-454d-9e68-3e3b3b72e203" />
 
 *Figure 26 — Server Manager Dashboard with the Active Directory Domains and Trusts tool highlighted*
 
 ---
 
-![Figure 27](figures/figure27.png)
+<img width="975" height="663" alt="image" src="https://github.com/user-attachments/assets/56742d4b-9286-42e9-90fa-4c2ee2bce803" />
 
 *Figure 27 — Active Directory Domains and Trusts console connected to PDC19.GBG.local*
 
 ---
 
-![Figure 28](figures/figure28.png)
+<img width="631" height="714" alt="image" src="https://github.com/user-attachments/assets/ae51212b-8ddd-425e-b230-d0567e20a65a" />
 
 *Figure 28 — Alternative UPN suffix gbgacademy.online added to the forest properties*
 
@@ -396,13 +396,13 @@ foreach ($User in $Users) {
 
 ---
 
-![Figure 29](figures/figure29.png)
+<img width="975" height="379" alt="image" src="https://github.com/user-attachments/assets/3d2a0d36-b340-49b8-91cf-c3b44140b4be" />
 
 *Figure 29 — User properties reflecting the updated UPN suffix gbgacademy.online after PowerShell bulk update*
 
 ---
 
-![Figure 30](figures/figure30.png)
+<img width="975" height="463" alt="image" src="https://github.com/user-attachments/assets/51b8ab95-730b-4125-82bf-ec2c67700b72" />
 
 *Figure 30 — ADUC confirming updated UPN on user accounts within the Security_Team OU*
 
@@ -414,7 +414,7 @@ The Azure Portal is accessed at `https://portal.azure.com` to locate and downloa
 
 ---
 
-![Figure 31](figures/figure31.png)
+<img width="975" height="364" alt="image" src="https://github.com/user-attachments/assets/601ae825-0134-4d1b-b169-7f7a8ce12ce5" />
 
 *Figure 31 — Azure Portal home page showing Entra ID and available Azure services*
 
@@ -426,7 +426,7 @@ In the Entra ID blade, Microsoft Entra Connect is found under the hybrid identit
 
 ---
 
-![Figure 32](figures/figure32.png)
+<img width="975" height="468" alt="image" src="https://github.com/user-attachments/assets/39852940-e9b6-4748-8a02-8195bbe923b5" />
 
 *Figure 32 — Microsoft Entra ID overview in the Azure Portal with Connect highlighted in the navigation*
 
