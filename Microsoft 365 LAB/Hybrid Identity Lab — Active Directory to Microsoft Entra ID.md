@@ -1,12 +1,29 @@
 # Hybrid Identity Lab — Active Directory to Microsoft Entra ID
 
+> End-to-end implementation of a hybrid identity environment, bridging an on-premises Active Directory infrastructure with Microsoft Entra ID (formerly Azure AD), built entirely on VMware Workstation.
+
+---
+
+## Table of Contents
+
+- [Introduction](#introduction)
+- [Objectives](#objectives)
+- [Tools & Technologies](#tools--technologies)
+- [Conceptual Foundation](#conceptual-foundation)
+- [Lab Implementation](#lab-implementation)
+  - [Phase 1 — Network Configuration](#phase-1--network-configuration)
+  - [Phase 2 — Domain Controller Promotion](#phase-2--domain-controller-promotion)
+  - [Phase 3 — Active Directory Structure](#phase-3--active-directory-structure)
+  - [Phase 4 — UPN Configuration & Entra Connect Installation](#phase-4--upn-configuration--entra-connect-installation)
+  - [Phase 5 — Domain Join & Final Verification](#phase-5--domain-join--final-verification)
+
 ---
 
 ## Introduction
 
-This lab documents the end-to-end implementation of a hybrid identity environment, bridging an on-premises Active Directory infrastructure with Microsoft Entra ID (formerly Azure AD). The environment is built entirely on VMware Workstation using isolated virtual machines, simulating a real enterprise network topology.
+This lab documents the end-to-end implementation of a hybrid identity environment that bridges an on-premises Active Directory infrastructure with Microsoft Entra ID. The environment is built entirely on VMware Workstation using isolated virtual machines, simulating a real enterprise network topology.
 
-The lab covers domain controller deployment, organizational unit design, user and group provisioning, identity synchronization via Microsoft Entra Connect, and verification of synced objects in the cloud tenant.
+The lab covers domain controller deployment, organizational unit design, user and group provisioning, identity synchronization via Microsoft Entra Connect, and full verification of synced objects in the cloud tenant.
 
 ---
 
@@ -36,15 +53,15 @@ The lab covers domain controller deployment, organizational unit design, user an
 
 ---
 
-## Conceptual Questions
+## Conceptual Foundation
 
-### 1. What is the difference between a Microsoft 365 Group and a Security Group?
+### 1. Microsoft 365 Group vs. Security Group
 
 | Feature | Microsoft 365 Group | Security Group |
 |---|---|---|
 | Purpose | Collaboration (Teams, SharePoint, Exchange) | Access control and permissions |
 | Has Mailbox | Yes | No |
-| Can be used for app/resource permissions | Limited | Yes |
+| Used for resource permissions | Limited | Yes |
 | Created in | Microsoft 365 / Entra ID | Active Directory or Entra ID |
 | Synced from on-prem AD | No | Yes |
 | Supports dynamic membership | Yes | Yes (Entra ID P1/P2) |
@@ -53,15 +70,15 @@ The lab covers domain controller deployment, organizational unit design, user an
 
 ---
 
-### 2. Dynamic User, Dynamic Group, and Assigned — What's the difference?
+### 2. Membership Types — Assigned, Dynamic User, Dynamic Group
 
-**Assigned:** Membership is managed manually by an administrator. Users are added or removed explicitly.
+**Assigned** — Membership is managed manually by an administrator. Users are added or removed explicitly with no automation involved.
 
-**Dynamic User:** A user account whose properties (like department, job title, or location) automatically trigger group membership based on a defined rule. Example rule: `department -eq "IT"` — any user with IT as their department automatically joins the group.
+**Dynamic User** — A user account whose attributes (such as department, job title, or location) automatically trigger group membership based on a defined rule. Example: `department -eq "IT"` — any user with IT as their department is automatically added to the group.
 
-**Dynamic Group:** A group whose membership is automatically maintained by Entra ID based on attribute-based rules. No manual additions are needed — the engine evaluates rules continuously and adjusts membership as attributes change.
+**Dynamic Group** — A group whose membership is entirely maintained by Entra ID based on attribute rules. No manual additions are needed; the engine evaluates rules continuously and adjusts membership as attributes change.
 
-> Requires **Entra ID P1 or P2** license for dynamic membership.
+> Requires **Entra ID P1 or P2** license for dynamic membership rules.
 
 ---
 
@@ -69,13 +86,13 @@ The lab covers domain controller deployment, organizational unit design, user an
 
 | Method | How It Works | Best For |
 |---|---|---|
-| **Password Hash Sync (PHS)** | AD password hashes are synced to Entra ID. Authentication happens in the cloud. | Simplest hybrid setup, high availability |
-| **Pass-Through Authentication (PTA)** | Authentication request is forwarded to on-prem AD in real time. Passwords never leave the network. | Compliance-driven orgs that cannot store hashes in cloud |
-| **Federation (AD FS)** | Entra ID redirects auth to a federated identity provider (AD FS). Full SSO experience. | Complex enterprise SSO with smart cards or MFA tokens |
-| **Cloud-Only Authentication** | Users exist only in Entra ID. No on-prem dependency. | Cloud-native organizations |
-| **Microsoft Authenticator (MFA)** | Push notification, OTP, or passwordless sign-in via the app | MFA enforcement for all users |
+| **Password Hash Sync (PHS)** | AD password hashes are synced to Entra ID; authentication happens in the cloud | Simplest hybrid setup, high availability |
+| **Pass-Through Authentication (PTA)** | Authentication request is forwarded to on-prem AD in real time; passwords never leave the network | Compliance-driven orgs that cannot store hashes in the cloud |
+| **Federation (AD FS)** | Entra ID redirects auth to a federated identity provider; full SSO experience | Complex enterprise SSO with smart cards or MFA tokens |
+| **Cloud-Only Authentication** | Users exist only in Entra ID with no on-prem dependency | Cloud-native organizations |
+| **Microsoft Authenticator (MFA)** | Push notification, OTP, or passwordless sign-in via the app | MFA enforcement across all users |
 | **FIDO2 Security Keys** | Hardware keys for passwordless authentication | High-security environments |
-| **Windows Hello for Business** | Biometric or PIN-based authentication tied to device | Modern workplace with Hybrid or Entra joined devices |
+| **Windows Hello for Business** | Biometric or PIN-based authentication tied to device | Modern workplace with Hybrid or Entra-joined devices |
 
 ---
 
@@ -83,382 +100,542 @@ The lab covers domain controller deployment, organizational unit design, user an
 
 ---
 
-## Phase 1 — Network Configuration
+### Phase 1 — Network Configuration
 
-Before deploying Active Directory, both virtual machines must be networked correctly. The Domain Controller requires two adapters: one for internet access (Bridged) and one for internal communication with the Windows 10 client (LAN Segment). The Windows 10 machine uses only the LAN Segment adapter, routing all traffic through the DC.
-
----
-
-### Step 1 — Configure VMware Network Adapters
-
-Each virtual machine is assigned the correct network adapter type inside VMware Workstation settings. The Server gets two adapters; the client gets one. This creates an isolated internal network while giving the server internet access through the physical machine.
-
-**Figure 1 — Windows Server 2019: Bridged Adapter (Internet)**
-<img width="975" height="980" alt="image" src="https://github.com/user-attachments/assets/dabc9079-bf1e-48ee-9131-6b710f4b799d" />
-
-
-**Figure 2 — Windows Server 2019: LAN Segment Adapter (Internal Network)**
-<img width="975" height="980" alt="image" src="https://github.com/user-attachments/assets/efbf60f4-1e6a-4254-988e-e107179ff40b" />
+Before any services are configured, both virtual machines must have their network adapters set up correctly. The Windows Server receives two adapters: a Bridged adapter for internet access, and a LAN Segment adapter (LAN-5) for internal communication with the Windows 10 client. The client is then configured with a static IP pointing to the server as its default gateway and DNS.
 
 ---
 
-### Step 2 — Open Server Manager and Review Initial State
+#### Step 1.1 — Configuring VM Network Adapters (Server)
 
-After booting Windows Server 2019, Server Manager opens automatically. The initial state shows the machine in WORKGROUP with no domain, and both network adapters visible. Three configurations are required before promotion: time zone, machine name, and static IP on the LAN adapter.
-
-**Figure 3 — Server Manager Local Server: Initial State Before Configuration**
-<img width="975" height="980" alt="image" src="https://github.com/user-attachments/assets/3336c48b-43ee-46ca-a66d-782dac11d35b" />
+The Windows Server VM is configured with two network adapters. The first is a Bridged adapter providing internet connectivity. The second is a LAN Segment (LAN-5) adapter for internal network isolation.
 
 ---
 
-### Step 3 — Set Static IP on the LAN-5 Adapter
+![Figure 1](figures/figure01.png)
 
-The LAN-5 (internal) adapter is configured with a static IP address so it can serve as a reliable gateway and DNS server for the Windows 10 client. The Bridged adapter is left as DHCP to receive internet from the physical network.
-
-**Figure 4 — Opening Network Connections via Network and Sharing Center**
-<img width="975" height="505" alt="image" src="https://github.com/user-attachments/assets/a58f4d55-24a6-41db-bc98-7d670a08e458" />
-
-**Figure 5 — Accessing IPv4 Properties on the LAN-5 Adapter**
-<img width="975" height="500" alt="image" src="https://github.com/user-attachments/assets/ed316126-0ebe-47e6-a36f-632e7f868209" />
-
-**Figure 6 — Static IP Configuration: 192.168.10.1 / DNS: 127.0.0.1**
-<img width="975" height="466" alt="image" src="https://github.com/user-attachments/assets/9357c5ce-1b31-4c3b-b057-3f0123d63b1d" />
+*Figure 1 — First network adapter configured as Bridged, connecting the server directly to the physical network*
 
 ---
 
-### Step 4 — Verify Server Network Configuration in Server Manager
+![Figure 2](figures/figure02.png)
 
-After applying the static IP, Server Manager reflects the updated network state. The Internet adapter shows DHCP (internet access) and LAN-5 shows the assigned static IP.
-
-**Figure 7 — Server Manager Confirming Dual Adapter Configuration**
-<img width="975" height="506" alt="image" src="https://github.com/user-attachments/assets/f81d578d-3691-4a59-a0f9-f933156ff0a0" />
+*Figure 2 — Second network adapter added and set to LAN-5, establishing the isolated internal segment*
 
 ---
 
-### Step 5 — Configure Windows 10 Static IP and Test Connectivity
+#### Step 1.2 — Configuring Static IP on the LAN Segment Interface
 
-The Windows 10 client is configured with a static IP in the same subnet as the server's LAN adapter, pointing to the server as both gateway and DNS. Connectivity is confirmed by pinging the DC's LAN IP.
-
-**Figure 8 — Windows 10 Static IP Configuration Pointing to DC**
-<img width="975" height="509" alt="image" src="https://github.com/user-attachments/assets/3d2e362c-bee7-4c38-b7a8-501247db8003" />
-
-**Figure 9 — Successful Ping from Windows 10 to Domain Controller (0% Packet Loss)**
-<img width="975" height="380" alt="image" src="https://github.com/user-attachments/assets/431168c4-55cb-43cf-ada1-c2bd6ab099f6" />
-
-> ✅ Phase 1 Complete — Network is fully operational. Both machines communicate over LAN-5 and the server has internet access via the Bridged adapter.
+Inside Server Manager under Local Server, the LAN-5 adapter (Ethernet 1) is assigned a static IP address of `192.168.10.1` with subnet mask `255.255.255.0`. The Bridged adapter (Ethernet 0) is left on DHCP for internet access.
 
 ---
 
-## Phase 2 — Domain Controller Promotion
+![Figure 3](figures/figure03.png)
 
-With networking in place, the Windows Server 2019 machine is promoted to a Domain Controller. This establishes the on-premises Active Directory forest `GBG.local`, which will later be synced to Entra ID.
-
----
-
-### Step 6 — Initiate Domain Controller Promotion
-
-The AD DS role was previously installed. The post-deployment notification in Server Manager triggers the promotion wizard.
-
-**Figure 10 — Server Manager Post-Deployment Notification: Promote to Domain Controller**
-<img width="975" height="469" alt="image" src="https://github.com/user-attachments/assets/56338cc6-36d4-4ad9-a065-5f779280253c" />
+*Figure 3 — Server Manager Local Server overview prior to network configuration*
 
 ---
 
-### Step 7 — Configure New Forest and Domain Name
+![Figure 4](figures/figure04.png)
 
-The wizard is set to create a new forest. The root domain name is set to `GBG.local`, which will serve as the on-premises domain throughout the lab.
-
-**Figure 11 — AD DS Configuration Wizard: Add a New Forest — Root Domain: GBG.local**
-<img width="975" height="470" alt="image" src="https://github.com/user-attachments/assets/e19136f3-1e3a-4d6d-806c-163fcce9dcb5" />
+*Figure 4 — Network Connections panel showing both adapters: the Bridged internet adapter and the LAN-5 internal adapter*
 
 ---
 
-### Step 8 — Set Domain Controller Capabilities and DSRM Password
+![Figure 5](figures/figure05.png)
 
-Forest and domain functional levels are set to Windows Server 2016. DNS Server and Global Catalog are enabled. The DSRM recovery password is configured.
-
-**Figure 12 — Domain Controller Options: Functional Levels, DNS, GC, and DSRM Password**
-<img width="975" height="464" alt="image" src="https://github.com/user-attachments/assets/26197de0-1d94-427e-8866-3701e5f2fd6a" />
+*Figure 5 — Ethernet properties dialog open for the LAN-5 interface, ready for static IP assignment*
 
 ---
 
-### Step 9 — Pass Prerequisites Check and Install
+![Figure 6](figures/figure06.png)
 
-All prerequisite checks pass successfully. Warnings about static IP and DNS delegation are expected in a lab environment and do not block installation. The Install button is clicked and the server reboots automatically.
-
-**Figure 13 — Prerequisites Check Passed: All Checks Successful — Ready to Install**
-<img width="965" height="708" alt="image" src="https://github.com/user-attachments/assets/4334170f-5600-498e-aa06-e0883dfbad4e" />
-
-**Figure 14 — Server Restarting After Domain Controller Promotion**
-<img width="975" height="903" alt="image" src="https://github.com/user-attachments/assets/7b13736e-1077-4b10-a0a5-b506a01f9d10" />
+*Figure 6 — Static IP address 192.168.10.1 assigned to the LAN-5 adapter with DNS set to loopback*
 
 ---
 
-### Step 10 — Verify Domain Controller Is Active
+![Figure 7](figures/figure07.png)
 
-After reboot, Server Manager confirms the machine is now a member of the `GBG.local` domain, no longer in WORKGROUP. Both adapters remain configured correctly.
-
-**Figure 15 — Server Manager Confirming Domain: GBG.local — DC Promotion Successful**
-<img width="975" height="465" alt="image" src="https://github.com/user-attachments/assets/849f207c-a69b-4129-9f77-45ee8fa0ebe0" />
-
-> ✅ Phase 2 Complete — PDC19 is now a fully operational Domain Controller for GBG.local.
+*Figure 7 — Server Manager reflecting the updated LAN-5 IP address after successful static configuration*
 
 ---
 
-## Phase 3 — Active Directory Structure and Entra Connect Sync
+#### Step 1.3 — Configuring the Windows 10 Client IP
 
-With the domain established, the AD structure is built: three OUs are created, users and security groups are provisioned inside the target OU, UPN suffixes are updated to match the Entra ID tenant domain, and Microsoft Entra Connect is installed and configured for scoped OU-level synchronization.
-
----
-
-### Step 11 — Open Active Directory Users and Computers
-
-ADUC is launched from Server Manager Tools. The GBG.local domain is visible with its default containers.
-
-**Figure 16 — Server Manager Tools Menu: Launching Active Directory Users and Computers**
-<img width="975" height="467" alt="image" src="https://github.com/user-attachments/assets/808419a2-74ae-4f93-8f98-234ebaddf4b2" />
-
+The Windows 10 VM is configured with a static IP of `192.168.10.20`, pointing to the server (`192.168.10.1`) as both the default gateway and preferred DNS server.
 
 ---
 
-### Step 12 — Create Organizational Units
+![Figure 8](figures/figure08.png)
 
-Three OUs are created directly under GBG.local to reflect a realistic department structure: Security_Team, IT_Team, and HR_Team.
-
-**Figure 17 — ADUC: Creating a New Organizational Unit Under GBG.local**
-<img width="975" height="712" alt="image" src="https://github.com/user-attachments/assets/bdd297fa-c30f-417f-aa54-5a5a7120c748" />
-
-**Figure 18 — ADUC: Three OUs Created — Security_Team, IT_Team, HR_Team**
-<img width="975" height="570" alt="image" src="https://github.com/user-attachments/assets/529e2137-3def-468f-bee3-a3de2785d268" />
+*Figure 8 — Windows 10 IPv4 properties configured with static IP 192.168.10.20 and gateway 192.168.10.1*
 
 ---
 
-### Step 13 — Create Users Inside the Target OU
+#### Step 1.4 — Verifying Connectivity
 
-Users are created inside the Security_Team OU using the ADUC new user wizard. Three users are provisioned: Ahmed Elgohary, Basel Ali, and Clara Mohamed.
-
-<img width="975" height="570" alt="image" src="https://github.com/user-attachments/assets/abf055a7-c8ee-4cb0-afff-96f526bcef49" />
-
-**Figure 19 — ADUC: Creating a New User Inside the Security_Team OU**
-
-<img width="675" height="578" alt="image" src="https://github.com/user-attachments/assets/8790ca38-e2f9-4e91-a267-9c7d05f710f8" />
-
-**Figure 20 — Security_Team OU: Three Users and Two Security Groups Populated**
+A ping test from the Windows 10 client to the server IP confirms successful bidirectional communication across the LAN segment with zero packet loss.
 
 ---
 
-### Step 14 — Create Security Groups and Assign Members
+![Figure 9](figures/figure09.png)
 
-Two Global Security Groups are created inside Security_Team: SOC and GRC. Users are assigned to their respective groups via the Members tab.
-
-**Figure 21 — SOC Group Properties: Members Tab Showing Assigned Users**
-![Figure 21](images/image21.png)
-
-**Figure 22 — GRC Group Properties: Members Tab Showing Assigned User**
-![Figure 22](images/image22.png)
+*Figure 9 — Successful ping to 192.168.10.1 from the Windows 10 client, confirming network connectivity*
 
 ---
 
-### Step 15 — Add Custom UPN Suffix in Active Directory Domains and Trusts
+### Phase 2 — Domain Controller Promotion
 
-Before syncing to Entra ID, the cloud tenant domain `gbgacademy.online` must be added as a UPN suffix in AD. This is done via Active Directory Domains and Trusts → UPN Suffixes.
-
-**Figure 23 — Active Directory Domains and Trusts: Adding gbgacademy.online as UPN Suffix**
-![Figure 23](images/image23.png)
-
-**Figure 24 — UPN Suffix gbgacademy.online Successfully Added to the Forest**
-![Figure 24](images/image24.png)
-
-**Figure 25 — Verifying UPN Suffix on a User Account: @gbgacademy.online Now Available**
-![Figure 25](images/image25.png)
+With the network in place, the server is promoted to a Domain Controller under a new Active Directory forest named `GBG.local`. DNS and Global Catalog roles are installed alongside AD DS during this phase.
 
 ---
 
-### Step 16 — Update All User UPNs via PowerShell
+#### Step 2.1 — Triggering the AD DS Promotion Wizard
 
-Rather than updating each user manually, a PowerShell script loops through all AD users and sets their UPN suffix to `@gbgacademy.online`. This is required for proper cloud identity matching during sync.
-
-**Figure 26 — PowerShell Script: Bulk UPN Update for All AD Users to @gbgacademy.online**
-![Figure 26](images/image26.png)
-
-**Figure 27 — ADUC User Properties: UPN Successfully Updated to @gbgacademy.online**
-![Figure 27](images/image27.png)
+After installing the AD DS role, Server Manager displays a post-deployment configuration notification. Clicking "Promote this server to a domain controller" launches the configuration wizard.
 
 ---
 
-### Step 17 — Navigate to Entra Connect in the Azure Portal
+![Figure 10](figures/figure10.png)
 
-The Entra ID portal is accessed from the DC's browser. Navigation goes to Identity → Hybrid Management → Microsoft Entra Connect → Connect Sync to locate the download link.
-
-**Figure 28 — Azure Portal: Navigating to Microsoft Entra Connect — Connect Sync Section**
-![Figure 28](images/image28.png)
-
-**Figure 29 — Entra Connect Portal Page: Sync Status Enabled — Download Link Visible**
-![Figure 29](images/image29.png)
+*Figure 10 — Server Manager post-deployment notification prompting domain controller promotion*
 
 ---
 
-### Step 18 — Activate Hybrid Identity Administrator Role via PIM
+#### Step 2.2 — Creating a New Forest
 
-The account `khaled@gbgacademy.online` requires the Hybrid Identity Administrator role to configure Entra Connect. The role is activated through Privileged Identity Management (PIM) in the Entra Admin Center.
-
-**Figure 30 — Entra Admin Center: PIM Role Activation for Hybrid Identity Administrator**
-![Figure 30](images/image30.png)
-
-**Figure 31 — PIM Activation Status: Hybrid Identity Administrator Role Successfully Activated**
-![Figure 31](images/image31.png)
+In the wizard, "Add a new forest" is selected with `GBG.local` set as the root domain name.
 
 ---
 
-### Step 19 — Launch Entra Connect Installer on the Domain Controller
+![Figure 11](figures/figure11.png)
 
-The `AzureADConnect.msi` installer is run on PDC19. The welcome screen confirms this is Microsoft Entra Connect Sync. The license agreement is accepted and Customize is selected to enable OU-level filtering.
-
-**Figure 32 — Entra Connect Installer: Welcome Screen on the Domain Controller**
-![Figure 32](images/image32.png)
-
-**Figure 33 — Entra Connect: Express Settings Screen — Selecting Customize for OU Filtering**
-![Figure 33](images/image33.png)
+*Figure 11 — Deployment Configuration step with "Add a new forest" selected and root domain set to GBG.local*
 
 ---
 
-### Step 20 — Install Required Components
+#### Step 2.3 — Setting Domain Controller Options
 
-The required components screen is presented. No custom SQL server, service account, or sync groups are needed for this lab. All checkboxes are left empty and Install is clicked.
-
-**Figure 34 — Entra Connect: Install Required Components — All Options Left as Default**
-![Figure 34](images/image34.png)
+The forest and domain functional levels are both set to Windows Server 2016. The DNS Server and Global Catalog options are enabled, and the DSRM password is configured.
 
 ---
 
-### Step 21 — Select Authentication Method
+![Figure 12](figures/figure12.png)
 
-The User Sign-In screen offers several authentication methods. Password Hash Synchronization is selected as it is the simplest and most suitable method for this lab environment.
-
-**Figure 35 — Entra Connect: User Sign-In — Password Hash Synchronization Selected**
-![Figure 35](images/image35.png)
+*Figure 12 — Domain Controller Options with DNS server and Global Catalog enabled, functional level set to Windows Server 2016*
 
 ---
 
-### Step 22 — Connect to Microsoft Entra ID
+#### Step 2.4 — Prerequisites Check & Installation
 
-The wizard prompts for Entra ID Global Admin or Hybrid Identity Admin credentials. The account `khaled@gbgacademy.online` is used, which now has the activated Hybrid Identity Administrator role.
-
-**Figure 36 — Entra Connect: Connect to Microsoft Entra ID — Entering Cloud Admin Credentials**
-![Figure 36](images/image36.png)
+The wizard completes its prerequisites check successfully. The server is then promoted and automatically reboots to apply all changes.
 
 ---
 
-### Step 23 — Connect to On-Premises Active Directory
+![Figure 13](figures/figure13.png)
 
-The on-premises AD forest `GBG.local` is detected. Enterprise Admin credentials `GBG\Administrator` are entered to allow Entra Connect to read and sync directory objects.
-
-**Figure 37 — Entra Connect: Connect to AD DS — Entering On-Premises Admin Credentials**
-![Figure 37](images/image37.png)
-
-**Figure 38 — Entra Connect: AD Forest GBG.local Successfully Added and Verified**
-![Figure 38](images/image38.png)
+*Figure 13 — Prerequisites check passed with informational warnings; ready for installation*
 
 ---
 
-### Step 24 — Configure Domain and OU Filtering
+![Figure 14](figures/figure14.png)
 
-This is the most critical step. Instead of syncing all OUs, only the `Security_Team` OU is selected. This ensures only the intended users and groups are synchronized to Entra ID.
-
-**Figure 39 — Entra Connect: Domain and OU Filtering — Only Security_Team OU Selected**
-![Figure 39](images/image39.png)
+*Figure 14 — Server rebooting as part of the domain controller promotion process*
 
 ---
 
-### Step 25 — Complete Configuration and Initiate Sync
+#### Step 2.5 — Verifying Domain Membership
 
-The remaining wizard steps are accepted as default. The Ready to Configure screen summarizes all actions. The option to start synchronization immediately is checked, and Install is clicked.
-
-**Figure 40 — Entra Connect: Ready to Configure — Summary of All Sync Settings**
-![Figure 40](images/image40.png)
-
-**Figure 41 — Entra Connect: Configuration Complete — Synchronization Process Initiated**
-![Figure 41](images/image41.png)
+After reboot, Server Manager confirms the server is now a member of `GBG.local` and the AD DS and DNS roles are fully operational.
 
 ---
 
-### Step 26 — Trigger Manual Sync Cycle via PowerShell
+![Figure 15](figures/figure15.png)
 
-After installation, a manual full sync is triggered from PowerShell to confirm the ADSync service is running and the initial sync cycle completes successfully.
-
-**Figure 42 — PowerShell: ADSync Service Running and Initial Sync Cycle Result — Success**
-![Figure 42](images/image42.png)
+*Figure 15 — Server Manager Local Server showing domain joined as GBG.local, confirming successful promotion*
 
 ---
 
-### Step 27 — Verify Synced Group in Entra ID Portal
+### Phase 3 — Active Directory Structure
 
-The Entra ID Groups section is checked. The SOC group appears with Source listed as Windows Server AD, confirming it was synced from the on-premises domain and not created manually in the cloud.
-
-**Figure 43 — Entra ID Portal: SOC Group Overview — Source: Windows Server AD**
-![Figure 43](images/image43.png)
-
-**Figure 44 — Entra ID Portal: SOC Group Overview Showing 2 Synced Members**
-![Figure 44](images/image44.png)
+With the domain controller running, the AD structure is built: Organizational Units are created to logically segment users, users are provisioned inside those OUs, and security groups are formed and populated.
 
 ---
 
-### Step 28 — Verify Synced Users Inside the Group
+#### Step 3.1 — Opening Active Directory Users and Computers
 
-The Members tab of the SOC group in Entra ID displays Ahmed Elgohary and Basel Ali — both synced from the on-premises Security_Team OU, with their group membership intact.
-
-**Figure 45 — Entra ID Portal: SOC Group Members — Ahmed Elgohary and Basel Ali Synced**
-![Figure 45](images/image45.png)
+From Server Manager's Tools menu, Active Directory Users and Computers (ADUC) is launched to begin building the directory structure.
 
 ---
 
-### Step 29 — Verify User On-Premises Sync Status in Entra ID
+![Figure 16](figures/figure16.png)
 
-The All Users blade in Entra ID is reviewed. Synced users show "On-premises sync enabled = Yes", confirming their identity source is the on-premises Active Directory via Entra Connect.
-
-**Figure 46 — Entra ID Portal: All Users List — On-Premises Sync Enabled for Synced Users**
-![Figure 46](images/image46.png)
+*Figure 16 — Server Manager Tools menu with Active Directory Users and Computers highlighted*
 
 ---
 
-### Step 30 — Verify GRC Group Also Synced with Members
+#### Step 3.2 — Creating Organizational Units
 
-The GRC security group is also confirmed in Entra ID with its members synced from the on-premises AD, completing the verification of all objects from the Security_Team OU.
-
-**Figure 47 — Entra ID Portal: GRC Group Members Verified After Sync**
-![Figure 47](images/image47.png)
-
-**Figure 48 — Entra ID Portal: Entra Connect Sync Status Showing Last Sync Timestamp**
-![Figure 48](images/image48.png)
-
-> ✅ Phase 3 Complete — All objects from the Security_Team OU (users, groups, and memberships) are successfully synchronized to Microsoft Entra ID via Entra Connect.
+Three Organizational Units are created under the GBG.local domain: `Security_Team`, `IT_Team`, and `HR_Team`. These OUs will serve as containers for users and will be the sync scope for Entra Connect.
 
 ---
 
-## Summary
+![Figure 17](figures/figure17.png)
 
-| Task | Status |
-|---|---|
-| VM network configuration (Bridged + LAN Segment) | ✅ Complete |
-| Static IP assignment on DC and Windows 10 | ✅ Complete |
-| Domain Controller promotion (GBG.local) | ✅ Complete |
-| OU structure creation (Security_Team, IT_Team, HR_Team) | ✅ Complete |
-| User and group provisioning with membership assignment | ✅ Complete |
-| UPN suffix update to @gbgacademy.online via PowerShell | ✅ Complete |
-| Hybrid Identity Administrator role activation via PIM | ✅ Complete |
-| Microsoft Entra Connect installation with OU-level filtering | ✅ Complete |
-| Sync verification in Entra ID (users, groups, membership) | ✅ Complete |
+*Figure 17 — Right-click context menu in ADUC with the New > Organizational Unit option selected*
 
 ---
 
-## Key Takeaways
+![Figure 18](figures/figure18.png)
 
-- **Scoped OU sync** prevents unnecessary cloud exposure of internal service accounts and administrative objects
-- **UPN alignment** between on-prem AD and the Entra ID tenant domain is essential for identity matching during sync
-- **PIM role activation** is the enterprise-standard approach to just-in-time privilege — roles are activated only when needed and expire automatically
-- **Password Hash Sync** is the recommended starting point for hybrid identity — it provides cloud authentication resilience even if the on-premises DC is unreachable
-- **Source of authority** remains on-premises AD for synced objects — changes must be made in AD, not in Entra ID
+*Figure 18 — ADUC tree view showing the three newly created OUs: Security_Team, IT_Team, and HR_Team*
 
 ---
 
-*Lab performed on VMware Workstation | Domain: GBG.local | Cloud Tenant: gbgacademy.online | Entra ID P2*
+#### Step 3.3 — Creating Users
+
+Users are created inside the appropriate OUs. The user creation wizard captures first name, last name, and the UPN logon name.
+
+---
+
+![Figure 19](figures/figure19.png)
+
+*Figure 19 — New user creation initiated inside the Security_Team OU*
+
+---
+
+![Figure 20](figures/figure20.png)
+
+*Figure 20 — User creation form filled with details for Ahmed Elgohary, UPN set to Ahmed.Elgohary@GBG.local*
+
+---
+
+![Figure 21](figures/figure21.png)
+
+*Figure 21 — Security_Team OU populated with three users: Ahmed Elgohary, Basel Ali, and Clara Mohamed*
+
+---
+
+#### Step 3.4 — Creating Security Groups
+
+Two security groups — `SOC` and `GRC` — are created inside the `Security_Team` OU as Global Security Groups.
+
+---
+
+![Figure 22](figures/figure22.png)
+
+*Figure 22 — New group creation initiated inside the Security_Team OU*
+
+---
+
+![Figure 23](figures/figure23.png)
+
+*Figure 23 — Security_Team OU now containing three users alongside the SOC and GRC security groups*
+
+---
+
+#### Step 3.5 — Adding Members to Groups
+
+Users are added to their respective groups. The SOC group receives Ahmed Elgohary, Basel Ali, and Khaled Elgohary. The GRC group receives Clara Mohamed.
+
+---
+
+![Figure 24](figures/figure24.png)
+
+*Figure 24 — Member selection dialog used to add Clara Mohamed to the GRC group*
+
+---
+
+![Figure 25](figures/figure25.png)
+
+*Figure 25 — SOC group properties showing three members: Ahmed Elgohary, Basel Ali, and Khaled Elgohary*
+
+---
+
+### Phase 4 — UPN Configuration & Entra Connect Installation
+
+Before synchronization can occur, a routable UPN suffix must be added and applied to all on-premises user accounts. Entra Connect is then downloaded, installed, and configured to sync identities to the cloud tenant.
+
+---
+
+#### Step 4.1 — Adding the UPN Suffix
+
+Using Active Directory Domains and Trusts, the alternative UPN suffix `gbgacademy.online` is added to the forest. This routable domain is verified in Entra ID and will be used as the sync UPN.
+
+---
+
+![Figure 26](figures/figure26.png)
+
+*Figure 26 — Server Manager Dashboard with the Active Directory Domains and Trusts tool highlighted*
+
+---
+
+![Figure 27](figures/figure27.png)
+
+*Figure 27 — Active Directory Domains and Trusts console connected to PDC19.GBG.local*
+
+---
+
+![Figure 28](figures/figure28.png)
+
+*Figure 28 — Alternative UPN suffix gbgacademy.online added to the forest properties*
+
+---
+
+#### Step 4.2 — Bulk UPN Update via PowerShell
+
+A PowerShell script updates the UPN of every user in the directory to use the new `@gbgacademy.online` suffix, enabling them to authenticate against the verified cloud domain after sync.
+
+```powershell
+Import-Module ActiveDirectory
+$Users = Get-ADUser -Filter *
+foreach ($User in $Users) {
+    Set-ADUser -Identity $User -UserPrincipalName "$($User.SamAccountName)@gbgacademy.online"
+}
+```
+
+---
+
+![Figure 29](figures/figure29.png)
+
+*Figure 29 — User properties reflecting the updated UPN suffix gbgacademy.online after PowerShell bulk update*
+
+---
+
+![Figure 30](figures/figure30.png)
+
+*Figure 30 — ADUC confirming updated UPN on user accounts within the Security_Team OU*
+
+---
+
+#### Step 4.3 — Navigating to the Azure Portal
+
+The Azure Portal is accessed at `https://portal.azure.com` to locate and download the Microsoft Entra Connect installer.
+
+---
+
+![Figure 31](figures/figure31.png)
+
+*Figure 31 — Azure Portal home page showing Entra ID and available Azure services*
+
+---
+
+#### Step 4.4 — Locating Entra Connect in the Portal
+
+In the Entra ID blade, Microsoft Entra Connect is found under the hybrid identity section. The latest Connect Sync version is downloaded from there.
+
+---
+
+![Figure 32](figures/figure32.png)
+
+*Figure 32 — Microsoft Entra ID overview in the Azure Portal with Connect highlighted in the navigation*
+
+---
+
+![Figure 33](figures/figure33.png)
+
+*Figure 33 — Entra Connect blade showing current sync status and the download option for the latest version*
+
+---
+
+![Figure 34](figures/figure34.png)
+
+*Figure 34 — Recent download history showing AzureADConnect.msi ready for installation*
+
+---
+
+#### Step 4.5 — Activating the Hybrid Identity Administrator Role
+
+Before installing Entra Connect, the Hybrid Identity Administrator role must be active. This is done through Privileged Identity Management (PIM) in the Entra admin center.
+
+---
+
+![Figure 35](figures/figure35.png)
+
+*Figure 35 — PIM My Roles view listing eligible assignments including Hybrid Identity Administrator*
+
+---
+
+![Figure 36](figures/figure36.png)
+
+*Figure 36 — Hybrid Identity Administrator role activation dialog with duration and justification fields*
+
+---
+
+![Figure 37](figures/figure37.png)
+
+*Figure 37 — PIM processing the role activation request across three validation stages*
+
+---
+
+![Figure 38](figures/figure38.png)
+
+*Figure 38 — Assigned roles view confirming Hybrid Identity Administrator is now actively assigned*
+
+---
+
+#### Step 4.6 — Installing Microsoft Entra Connect Sync
+
+The Entra Connect installer is launched on the domain controller. Express settings are used with customization applied to accommodate the non-routable `GBG.local` domain.
+
+---
+
+![Figure 39](figures/figure39.png)
+
+*Figure 39 — Microsoft Entra Connect Sync welcome screen with license agreement accepted*
+
+---
+
+![Figure 40](figures/figure40.png)
+
+*Figure 40 — Express Settings page noting that GBG.local is non-routable and recommending custom settings*
+
+---
+
+#### Step 4.7 — Connecting to Entra ID and AD DS
+
+The wizard prompts for cloud credentials (Hybrid Identity Administrator account) and then for on-premises AD enterprise administrator credentials to establish both connections.
+
+---
+
+![Figure 41](figures/figure41.png)
+
+*Figure 41 — Cloud credential entry using the khaled@gbgacademy.online Hybrid Identity Administrator account*
+
+---
+
+![Figure 42](figures/figure42.png)
+
+*Figure 42 — On-premises AD DS credential entry using the GBG\Administrator enterprise account*
+
+---
+
+#### Step 4.8 — UPN Suffix Mapping Verification
+
+The wizard displays a UPN suffix mapping table. The `gbgacademy.online` suffix is shown as Verified while `gbg.local` appears as Not Added — confirming correct configuration.
+
+---
+
+![Figure 43](figures/figure43.png)
+
+*Figure 43 — UPN suffix mapping table confirming gbgacademy.online as verified in Entra ID*
+
+---
+
+#### Step 4.9 — Completing Installation & Triggering Sync
+
+The configuration summary is reviewed and installation is executed. After completion, an initial sync cycle is triggered manually via PowerShell to immediately push identities to Entra ID.
+
+---
+
+![Figure 44](figures/figure44.png)
+
+*Figure 44 — Ready to Configure summary listing all actions Entra Connect will perform*
+
+---
+
+![Figure 45](figures/figure45.png)
+
+*Figure 45 — PowerShell confirming ADSync service is running and initial sync cycle completed successfully*
+
+---
+
+### Phase 5 — Domain Join & Final Verification
+
+The Windows 10 client is joined to the `GBG.local` domain and moved into the correct OU. Final verification is performed in both the Azure Portal and on the Windows 10 machine by signing in with synced hybrid credentials.
+
+---
+
+#### Step 5.1 — Verifying Synced Groups in Entra ID
+
+The Azure Portal is checked to confirm that the SOC and GRC security groups have been successfully synced from on-premises AD to Entra ID.
+
+---
+
+![Figure 46](figures/figure46.png)
+
+*Figure 46 — Entra ID All Groups view showing the SOC group synced from on-premises Active Directory*
+
+---
+
+![Figure 47](figures/figure47.png)
+
+*Figure 47 — SOC group members in Entra ID: Ahmed Elgohary, Basel Ali, and Khaled — all confirmed as synced*
+
+---
+
+![Figure 48](figures/figure48.png)
+
+*Figure 48 — GRC group members in Entra ID showing Clara Mohamed successfully synced from on-premises AD*
+
+---
+
+#### Step 5.2 — Joining the Windows 10 Client to the Domain
+
+The Windows 10 machine is joined to `GBG.local` using System Properties. Enterprise administrator credentials are provided to authorize the join.
+
+---
+
+![Figure 49](figures/figure49.png)
+
+*Figure 49 — Windows 10 System Properties showing domain join field with GBG.local entered*
+
+---
+
+![Figure 50](figures/figure50.png)
+
+*Figure 50 — Domain join credential prompt requesting GBG\Administrator credentials*
+
+---
+
+![Figure 51](figures/figure51.png)
+
+*Figure 51 — Confirmation dialog welcoming the machine to the GBG.local domain*
+
+---
+
+#### Step 5.3 — Moving the Computer Object into the OU
+
+After the join, the computer object `KHALEDELGOHARY` appears in the default Computers container in ADUC. It is then moved into the `Security_Team` OU for proper organizational alignment.
+
+---
+
+![Figure 52](figures/figure52.png)
+
+*Figure 52 — ADUC showing the KHALEDELGOHARY computer object in the default Computers container*
+
+---
+
+![Figure 53](figures/figure53.png)
+
+*Figure 53 — Move dialog with Security_Team selected as the destination container*
+
+---
+
+![Figure 54](figures/figure54.png)
+
+*Figure 54 — Security_Team OU containing all users, groups, and the domain-joined computer object*
+
+---
+
+#### Step 5.4 — Final Verification: Hybrid Identity in Action
+
+The lab concludes with a side-by-side view confirming complete hybrid identity success: the Windows 10 machine is logged in as `Ahmed.Elgohary.GBG`, the Entra ID Users portal shows 66 synced users with on-premises identity markers, and the SOC group in Entra ID lists all correct members — all synced from on-premises AD.
+
+---
+
+![Figure 55](figures/figure55.png)
+
+*Figure 55 — Final state: Windows 10 logged in with hybrid credentials, Entra ID reflecting 66 synced users, and SOC group membership fully verified in the cloud*
+
+---
+
+## Result
+
+All on-premises Active Directory identities — users, groups, and the computer object — are successfully synchronized to Microsoft Entra ID. Users can now authenticate against both `GBG.local` and `gbgacademy.online`, and group membership is reflected accurately in the cloud tenant, completing the hybrid identity bridge between on-premises AD and Microsoft Entra ID.
+
+---
+
+> **Lab by:** Khaled Elgohary  
+> **Domain:** GBG.local → gbgacademy.online  
+> **Completed:** May 2026
