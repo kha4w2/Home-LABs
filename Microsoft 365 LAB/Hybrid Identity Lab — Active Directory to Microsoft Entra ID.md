@@ -2,6 +2,10 @@
 
 > End-to-end implementation of a hybrid identity environment, bridging an on-premises Active Directory infrastructure with Microsoft Entra ID (formerly Azure AD), built entirely on VMware Workstation.
 
+<img width="1407" height="768" alt="Gemini_Generated_Image_eur6h2eur6h2eur6" src="https://github.com/user-attachments/assets/d400934e-e371-4eaa-9b62-05dbe37e5d4a" />
+<img width="975" height="518" alt="image" src="https://github.com/user-attachments/assets/e71247f8-4119-41e7-a773-178c52fe3ded" />
+
+
 ---
 
 ## Table of Contents
